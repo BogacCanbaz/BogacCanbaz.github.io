@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bogac Canbaz</title>
-  <meta name="description" content="Bogac Canbaz builds real-time controllers for underactuated mechatronic systems and validates them on hardware. Adaptive sliding mode control, LQR, state estimation, MATLAB/Simulink model-based design.">
+  <meta name="description" content="Bogac Canbaz designs, optimizes, and validates control systems for electromechanical and multibody machines, from robotic manipulators to vehicles that move through air and water.">
 
   <meta property="og:title" content="Bogac Canbaz">
-  <meta property="og:description" content="Real-time control of underactuated systems, validated on hardware. Adaptive sliding mode control, state estimation, model-based design.">
+  <meta property="og:description" content="Control system design for electromechanical and multibody machines, taken from model to working hardware.">
   <meta property="og:image" content="assets/rig.jpeg">
   <meta property="og:type" content="website">
 
@@ -19,11 +19,11 @@
 <body>
 
 <header class="site-header">
-  <a class="wordmark" href="#top">Bogac Canbaz</a>
+  <a class="wordmark" href="index.html">Bogac Canbaz</a>
   <nav aria-label="Site">
-    <a href="#research">Research</a>
-    <a href="#publications">Publications</a>
-    <a href="#patents">Patents</a>
+    <a href="index.html" aria-current="page">About</a>
+    <a href="research.html">Research</a>
+    <a href="publications.html">Publications</a>
     <a href="assets/CV_BogacCanbaz.pdf">CV</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -33,211 +33,105 @@
 
   <section class="intro">
     <div class="intro-text">
-      <h1>Control engineer. I design feedback controllers for systems that have fewer actuators than degrees of freedom, and I prove they work on real hardware.</h1>
+      <h1>I design control systems for machines that move, and I am not satisfied with a controller until it has run on the machine.</h1>
       <p>
-        I am a PhD candidate in Electrical Engineering at the University of Nebraska-Lincoln, graduating December 2026.
-        My dissertation built the first real-time control stack reported for an underactuated double-gimbal control moment gyroscope:
-        a nonlinear, robust, adaptive controller running at 500 Hz on a Quanser gyroscope platform, with stability proven and every result measured on the rig.
-        Before that I did multiphysics design optimization for high-frequency SiC power modules, work that produced two published U.S. patent applications.
+        Most of the interesting systems in engineering are nonlinear, coupled, and harder to drive than they look.
+        A robotic arm carries its own changing inertia. A vehicle in water or air has no fixed ground to push against.
+        A gyroscopic platform has axes that no motor touches directly. What these have in common is that the dynamics do most of the work,
+        and the control engineer's job is to understand them well enough to use them.
       </p>
-      <p class="links">
-        <a href="mailto:bogaccanbaz@gmail.com">bogaccanbaz@gmail.com</a>
-        <a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a>
-        <a href="https://scholar.google.com/citations?hl=en&user=BVSwISgAAAAJ">Google Scholar</a>
-        <a href="assets/CV_BogacCanbaz.pdf">CV (PDF)</a>
+      <p>
+        That is the thread through everything I do: take a physical machine, model it honestly, design a feedback law that respects what the machine can actually do,
+        prove the law is stable, and then find out what the model left out by running it on hardware.
       </p>
     </div>
     <figure class="portrait">
-      <img src="assets/headshot.jpeg" alt="Bogac Canbaz" onerror="this.parentElement.classList.add('missing')">
+      <img src="assets/headshot.jpeg" alt="Bogac Canbaz">
     </figure>
   </section>
 
-  <section class="hero">
-    <video src="assets/udgcmg.mp4" poster="assets/rig.jpeg" autoplay muted loop playsinline aria-label="The gyroscope rig tracking a reference trajectory under adaptive sliding mode control"></video>
-    <!--
-    If you host the long version on YouTube instead, replace the video tag above with:
-    <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0" title="Adaptive sliding mode control of an underactuated double-gimbal CMG" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
-    -->
-    <figcaption>
-      The rig: a spinning rotor inside two motorized gimbals, all mounted in an outer frame that has no motor of its own.
-      The controller moves the two gimbals so that the unpowered frame follows a commanded trajectory.
-    </figcaption>
+  <section class="section">
+    <h2>What I work on</h2>
+    <dl class="capabilities">
+
+      <div>
+        <dt>Modeling and simulation of electromechanical systems</dt>
+        <dd>
+          Deriving multibody dynamics from first principles, building plant and controller models in MATLAB/Simulink,
+          and multiphysics finite element analysis in COMSOL and ANSYS where thermal, structural, and electrical behavior are coupled.
+        </dd>
+      </div>
+
+      <div>
+        <dt>Nonlinear and robust control design</dt>
+        <dd>
+          Sliding mode and adaptive control, optimal state feedback, cascaded loops, and active disturbance rejection,
+          with stability established through Lyapunov analysis rather than assumed from simulation results.
+          I am particularly drawn to underactuated systems, where there are fewer actuators than degrees of freedom and the usual design shortcuts stop working.
+        </dd>
+      </div>
+
+      <div>
+        <dt>State estimation and sensor fusion</dt>
+        <dd>
+          Observer design, filtering, and fusing position, current, and inertial measurements into the state a controller needs,
+          including physics-informed learned estimators constrained by the governing equations of the plant.
+        </dd>
+      </div>
+
+      <div>
+        <dt>Design optimization under real constraints</dt>
+        <dd>
+          Searching a design space against the limits that actually bind: stress, thermal margin, actuator saturation, parasitics, manufacturability.
+          A design that only works on paper has not been optimized, it has been sketched.
+        </dd>
+      </div>
+
+      <div>
+        <dt>Real-time implementation and hardware validation</dt>
+        <dd>
+          Deploying control loops on resource-constrained real-time targets, instrumenting a test rig, and running the experiments that decide whether the design was right.
+          Most of what I know about control I learned from the gap between what the simulation predicted and what the hardware did.
+        </dd>
+      </div>
+
+    </dl>
   </section>
 
-  <section id="research" class="section">
-    <h2>Research</h2>
-
-    <article class="project">
-      <div class="project-text">
-        <h3>Real-time control of an underactuated double-gimbal control moment gyroscope</h3>
-        <p class="project-meta">PhD dissertation, 2022 to 2026. Advisors: Wei Qiao and Liyan Qu.</p>
-
-        <h4>The problem</h4>
-        <p>
-          A control moment gyroscope steers a spacecraft, ship, or robot by tilting a fast-spinning rotor. The double-gimbal version has two motors and four rigid bodies,
-          so one axis is never driven directly. It has to be moved through gyroscopic coupling, and the coupling itself changes with the gimbal angles.
-          At certain angles the gimbal axes line up and one control direction disappears entirely. That is gimbal lock, and a controller that wanders into it loses the plant.
-          When I started, nobody had stabilized this configuration on hardware.
-        </p>
-
-        <h4>What I built</h4>
-        <p>
-          The full stack from model to rig. Euler-Lagrange dynamics with a configuration-dependent inertia matrix; a MATLAB/Simulink controller running through QUARC on a Q8-USB data acquisition board at a 2 ms cycle;
-          optical encoders on every body, filtered and differentiated for velocity; torque commands converted to motor current through a linear current amplifier with saturation limits to protect the motors.
-          I ran all of the hardware experiments and the digital-twin simulations they are compared against.
-        </p>
-
-        <h4>What the hardware taught me</h4>
-        <p>
-          My first controller was an adaptive LQR built on a state-dependent Riccati equation. It passed every stability check in the linear region and worked on the rig for stabilization tasks.
-          Under a time-varying reference, one gimbal drifted across the gimbal-lock boundary, the linearization behind the Riccati update stopped being valid, and the closed loop diverged.
-          Simulation had not shown this because the model had no notion of the boundary. The hardware did.
-        </p>
-        <p>
-          So I redesigned the controller as an adaptive sliding mode law with the constraint written into the control law itself.
-          A composite sliding manifold couples the actuated gimbal velocities to the unactuated tracking error, a barrier Lyapunov function pushes the gimbals away from the singular boundaries before they get there,
-          a fractional-power reaching law gives finite-time convergence with a computable time bound, and a gradient adaptation law absorbs friction, encoder quantization, and external disturbance torques without needing to know their bound in advance.
-        </p>
-
-        <h4>Measured on the rig</h4>
-        <table class="metrics">
-          <caption>Finite-time adaptive sliding mode control (FT-ASMC) against the adaptive LQR baseline, same hardware, same references</caption>
-          <thead>
-            <tr><th scope="col">Test</th><th scope="col">FT-ASMC</th><th scope="col">Adaptive LQR</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Release from initial error, 2% settling time</th>
-              <td>0.94 s</td>
-              <td>3.02 s</td>
-            </tr>
-            <tr>
-              <th scope="row">Smooth S-curve tracking, RMS error</th>
-              <td>0.12°</td>
-              <td>diverged past gimbal lock</td>
-            </tr>
-            <tr>
-              <th scope="row">Smooth S-curve tracking, peak error</th>
-              <td>0.28°</td>
-              <td>18.1° before shutdown</td>
-            </tr>
-            <tr>
-              <th scope="row">Same tracking with an external disturbance torque on the unpowered frame, RMS error</th>
-              <td>0.19°</td>
-              <td>diverged</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="note">
-          Two recent controllers from the underactuated-systems literature were also run on the rig as baselines; both diverged in every test because their stability arguments rely on a gravitational restoring torque that a horizontally mounted gyroscope does not have.
-        </p>
-
-        <h4>Mathematical background</h4>
-        <ul class="math">
-          <li>Euler-Lagrange modeling of multibody systems, partial linearization, controllability of the actuated and unactuated subsystems</li>
-          <li>State-dependent Riccati equation control and its local stability argument</li>
-          <li>Sliding mode control for underactuated systems: composite manifolds, reaching laws, chattering and its mitigation</li>
-          <li>Lyapunov direct method, LaSalle's invariance principle, barrier Lyapunov functions for state constraints</li>
-          <li>Finite-time stability theory, comparison lemmas, Young's and Cauchy-Schwarz inequalities used in the convergence proofs</li>
-          <li>Online parameter and disturbance adaptation without a known disturbance bound</li>
-        </ul>
-      </div>
-
-      <div class="project-figures">
-        <figure>
-          <img src="assets/rig.jpeg" alt="The Quanser gyroscope platform configured as an underactuated double-gimbal CMG" onerror="this.parentElement.style.display='none'">
-          <figcaption>The platform. Rotor, inner and outer gimbals, and the unpowered outer frame, each with an optical encoder.</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/fig-gimbal-lock.png" alt="Singularity boundaries of the gimbal angles, with the admissible operating cell shaded" onerror="this.parentElement.style.display='none'">
-          <figcaption>Gimbal-lock boundaries in the space of the two gimbal angles. The controller keeps the gimbals inside one cell for all time.</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/fig-tracking.png" alt="Measured tracking of the S-curve reference and the tracking error under FT-ASMC" onerror="this.parentElement.style.display='none'">
-          <figcaption>Measured tracking of a seven-phase sinusoidal-jerk S-curve reference on the unpowered axis, and the resulting error.</figcaption>
-        </figure>
-      </div>
-    </article>
-
-    <article class="project">
-      <div class="project-text">
-        <h3>Physics-informed observer for closed-loop state and torque estimation</h3>
-        <p class="project-meta">PhD research, PyTorch and MATLAB/Simulink.</p>
-        <p>
-          The gyroscope's encoders give position only, and differentiating them amplifies quantization noise into the velocity signal the controller depends on.
-          I fused encoder and motor-current measurements through a physics-informed neural network observer whose loss function is penalized by the Euler-Lagrange dynamics,
-          so the network cannot learn an estimate that violates the physics. Against a model-based observer on the same rig data, the closed loop tracked with 9.87% lower error and used 4.95% less control energy.
-        </p>
-        <h4>Mathematical background</h4>
-        <ul class="math">
-          <li>Observer design and separation of estimation from control</li>
-          <li>Physics-informed learning: residuals of the governing equations as training loss</li>
-          <li>Sensor fusion of position encoders with current-derived torque estimates</li>
-        </ul>
-      </div>
-      <div class="project-figures">
-        <figure>
-          <img src="assets/fig-observer.png" alt="Block diagram of the physics-informed observer in the control loop" onerror="this.parentElement.style.display='none'">
-          <figcaption>Where the observer sits in the loop.</figcaption>
-        </figure>
-      </div>
-    </article>
-
-    <article class="project">
-      <div class="project-text">
-        <h3>A monolithic spring for high-frequency press-pack SiC power modules</h3>
-        <p class="project-meta">MS research, 2022 to 2024, with Jun Wang, Ekaterina Muravleva, Liyan Qu, and Jerry Hudgins.</p>
-        <p>
-          Press-pack power modules clamp semiconductor dies between electrodes with springs. The stacked stainless-steel disc springs used in IGBT modules add resistance, inductance, and thermal resistance that SiC devices switching ten times faster cannot tolerate,
-          and SiC dies are too small to press-contact at all. I designed a single beryllium-copper block with interleaved laser-cut slits that acts as the spring, the conductor, and the heat path at once, with four sintered legs bonded directly to the dies.
-        </p>
-        <p>
-          The design was optimized by scanning the slit geometry in COMSOL through LiveLink for MATLAB against a 1000 MPa body-stress limit at 650 N clamping force.
-          The chosen point gives 0.773 mm deflection, 874.7 MPa peak stress, 148 µΩ DC resistance against 856 µΩ for the disc-spring assembly it replaces, and 2.8 nH stray inductance.
-          Fabricated parts tested on an Instron frame stayed in the elastic region and recovered their shape, and measured resistance and inductance agreed with simulation.
-          This work is the basis of two U.S. patent applications on which I am a co-inventor.
-        </p>
-        <h4>Mathematical background</h4>
-        <ul class="math">
-          <li>Finite element analysis of coupled structural and electrical fields</li>
-          <li>Discrete design-space optimization under stress and deflection constraints</li>
-          <li>Skin effect and stray inductance at switching frequencies of 20 kHz</li>
-        </ul>
-      </div>
-      <div class="project-figures">
-        <figure>
-          <img src="assets/fig-spring.png" alt="Rendering of the monolithic spring and the simulated stress distribution" onerror="this.parentElement.style.display='none'">
-          <figcaption>The spring and its simulated body stress under load. Stress concentrates at the slit ends, which set the slit-width limit.</figcaption>
-        </figure>
-      </div>
-    </article>
+  <section class="section">
+    <h2>Where it applies</h2>
+    <p class="lede">
+      The mathematics of underactuated, strongly coupled multibody control is not specific to one industry. The same structure appears wherever a machine has to move precisely
+      without a rigid reference to push against. These are the areas I find most compelling.
+    </p>
+    <ul class="domains">
+      <li><strong>Robotic manipulators and mobile robots.</strong> Serial arms with configuration-dependent inertia, compliant and flexible joints, and contact tasks where the controller has to stay stable through changing dynamics.</li>
+      <li><strong>Attitude control and stabilization platforms.</strong> Momentum-exchange actuators for spacecraft and satellites, and the gyroscopic stabilizers used on ships, camera platforms, and self-balancing vehicles.</li>
+      <li><strong>Aerial and unmanned vehicles.</strong> Guidance, navigation, and control for systems with no stationary frame, where attitude is regulated through coupling between rotating bodies and control surfaces.</li>
+      <li><strong>Marine and underwater vehicles.</strong> Orientation control under buoyancy, added mass, and wave-induced disturbances the controller never measures directly.</li>
+      <li><strong>Industrial automation and motion control.</strong> High-speed multi-axis actuators, smooth trajectory generation with bounded jerk, and protective logic that keeps a machine inside its safe envelope.</li>
+      <li><strong>Power electronics and drives.</strong> Motor drive and inverter design, and translating electrical and thermal limits into control constraints so the hardware is never asked for more than it can survive.</li>
+    </ul>
   </section>
 
-  <section id="publications" class="section">
-    <h2>Publications</h2>
-    <ol class="pubs">
-      <li>B. Canbaz, L. Qu, and W. Qiao, "Adaptive linear quadratic regulator-based stabilizing control for underactuated double-gimbal control moment gyroscopes," <em>IEEE Transactions on Industry Applications</em>, 2026, <a href="https://doi.org/10.1109/TIA.2026.3653743">doi: 10.1109/TIA.2026.3653743</a>.</li>
-      <li>B. Canbaz, W. Qiao, and L. Qu, "Adaptive sliding mode-based robust control for underactuated double-gimbal control moment gyroscopes," in <em>Proc. 16th IEEE International Conference on Industry Applications (INDUSCON)</em>, 2025, pp. 918 to 925.</li>
-      <li>B. Canbaz, W. Qiao, and L. Qu, "Adaptive LQR control of underactuated double-gimbal control moment gyroscope," in <em>Proc. IEEE/IAS 61st Industrial and Commercial Power Systems Technical Conference (ICPS)</em>, Phoenix, AZ, 2024.</li>
-      <li>B. Canbaz, E. Muravleva, J. Wang, L. Qu, and J. Hudgins, "Design and optimization of a novel monolithic spring for high-frequency press-pack SiC FET modules," in <em>Proc. IEEE Energy Conversion Congress and Exposition (ECCE)</em>, Nashville, TN, 2023, pp. 5551 to 5557.</li>
-      <li>E. Muravleva, B. Canbaz, J. Wang, L. Qu, and J. Hudgins, "Switch cell design for novel high-frequency press-pack SiC FET modules," in <em>Proc. IEEE Energy Conversion Congress and Exposition (ECCE)</em>, Nashville, TN, 2023, pp. 5455 to 5461.</li>
-      <li>B. Canbaz, L. Qu, and W. Qiao, "Finite-time adaptive sliding-mode-based control for underactuated double-gimbal control moment gyroscopes," submitted to <em>IEEE Transactions on Industrial Electronics</em>, under review.</li>
-    </ol>
-  </section>
-
-  <section id="patents" class="section">
-    <h2>Patents</h2>
-    <ol class="pubs">
-      <li>J. Wang, E. Muravleva, B. Canbaz, and L. Qu, "High frequency press pack SiC FET modules," published U.S. Patent Application <a href="https://patents.google.com/patent/US20260039294A1/en">US 2026/0039294 A1</a>, February 2026, patent pending.</li>
-      <li>J. Wang, B. Canbaz, E. Muravleva, and L. Qu, "Monolithic spring assemblies for high frequency press pack modules," published U.S. Patent Application <a href="https://patents.google.com/patent/US20260036180A1/en">US 2026/0036180 A1</a>, February 2026, patent pending.</li>
-    </ol>
+  <section class="section">
+    <h2>Currently</h2>
+    <p class="lede">
+      I am completing a PhD in Electrical Engineering at the University of Nebraska-Lincoln, where I built the first real-time control stack reported in the literature
+      for an underactuated double-gimbal control moment gyroscope and validated it on a Quanser hardware platform.
+      Earlier I worked on multiphysics design optimization for high-frequency SiC power modules, which produced two published U.S. patent applications.
+      The full account of both is on the <a href="research.html">research page</a>.
+    </p>
   </section>
 
   <section id="contact" class="section contact">
     <h2>Contact</h2>
     <p>
-      I am looking for controls, robotics, GNC, power electronics, and automation roles starting on or after my graduation in December 2026, and for postdoctoral positions in robot control.
-      The fastest way to reach me is <a href="mailto:bogaccanbaz@gmail.com">bogaccanbaz@gmail.com</a>.
+      I am always glad to talk about control design, underactuated systems, and getting theory onto hardware.
+      Reach me at <a href="mailto:bogaccanbaz@gmail.com">bogaccanbaz@gmail.com</a> or on
+      <a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a>.
+      My work is indexed on <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a>,
+      and my <a href="assets/CV_BogacCanbaz.pdf">CV is here</a>.
     </p>
   </section>
 
@@ -245,7 +139,7 @@
 
 <footer class="site-footer">
   <span>Bogac Canbaz</span>
-  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf">CV</a></span>
+  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf">CV</a></span>
 </footer>
 
 </body>

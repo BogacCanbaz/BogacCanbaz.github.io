@@ -1,15 +1,33 @@
-# Site files
+# bogaccanbaz.github.io
 
-Put these in the assets/ folder with exactly these names. Any figure you do not add is hidden automatically.
+Three pages, plain HTML and CSS, no build step.
 
-- assets/headshot.jpg          your photo, portrait orientation, at least 800 px wide
-- assets/rig.jpg               the rig photo (the WhatsApp image, renamed)
-- assets/udgcmg.mp4            compressed video from IMG_2743_2.MOV
-- assets/udgcmg-poster.jpg     still frame from the video
-- assets/fig-gimbal-lock.png   Fig. 2 from the INDUSCON or TIE paper (singularity boundaries)
-- assets/fig-tracking.png      Case II tracking plot (a) and (b) from the TIE paper, or the ASMC slide from your deck
-- assets/fig-observer.png      block diagram of the PINN observer in the loop (optional)
-- assets/fig-spring.png        Fig. 2(a) or Fig. 4(a) from the ECCE spring paper
-- assets/CV_BogacCanbaz.pdf    current CV
+- index.html          intro and interests
+- research.html       the three projects, video, metrics
+- publications.html   papers and patents
+- style.css           shared styles for all three
 
-Preview locally:   python -m http.server 8000   then open http://localhost:8000
+## assets/
+
+Add files with exactly these names. Any figure that is missing is hidden automatically.
+
+- headshot.jpeg        your photo (in place)
+- rig.jpeg             the rig photo (in place)
+- udgcmg.mp4           compressed video from IMG_2743_2.MOV
+- fig-gimbal-lock.png  singularity boundaries figure
+- fig-tracking.png     Case II tracking plot and error
+- fig-observer.png     observer block diagram
+- fig-spring.png       monolithic spring render or stress plot
+- CV_BogacCanbaz.pdf   current CV
+
+## Preview locally
+
+    python -m http.server 8000
+
+then open http://localhost:8000
+
+## Publish a change
+
+    git add .
+    git commit -m "what changed"
+    git push
