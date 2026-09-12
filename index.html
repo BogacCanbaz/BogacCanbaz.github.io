@@ -33,8 +33,11 @@
       <p class="eyebrow-role">PhD Candidate and Control Systems Engineer</p>
       <h1>Bogac Canbaz</h1>
       <p class="standfirst">
-        I am completing a PhD in Electrical Engineering at the University of Nebraska-Lincoln, graduating in December 2026,
-        and I am exploring where to take this work next once the degree is finished.
+        I am a PhD candidate in Electrical Engineering at the University of Nebraska-Lincoln, graduating in December 2026. I design optimal and nonlinear control algorithms from first principles and prove them on hardware under hard real-time constraints.
+
+My dissertation built the first real-time control stack reported in the literature for an underactuated gyroscopic system, a machine with fewer actuators than degrees of freedom and a singular configuration it must never reach. My first design passed every check in simulation and then failed on the rig, close to that singularity. Rebuilding it as a constrained nonlinear controller, one that carries the limit inside the control law rather than assuming the plant will stay away from it, produced a system that settles faster, tracks more accurately, and holds the machine inside its safe envelope throughout.
+
+I work across the whole path: deriving the dynamics, formulating the cost and constraint terms, deploying generated code onto real-time targets, and defining the gates a controller has to clear before it is allowed anywhere near the hardware. I am drawn to complex electromechnaical systems, where controls is the layer that turns planned intent into motion that is precise, smooth, and safe.
       </p>
       <p class="links">
         <a href="mailto:bogaccanbaz@gmail.com">bogaccanbaz@gmail.com</a>
