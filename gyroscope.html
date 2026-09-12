@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Research | Bogac Canbaz</title>
-  <meta name="description" content="Real-time control of an underactuated double-gimbal control moment gyroscope, a physics-informed observer, and design optimization of a monolithic spring for SiC power modules.">
-  <meta property="og:title" content="Research | Bogac Canbaz">
-  <meta property="og:description" content="Real-time control of an underactuated double-gimbal control moment gyroscope, a physics-informed observer, and design optimization of a monolithic spring for SiC power modules.">
+  <title>Real-time control of an underactuated gyroscope | Bogac Canbaz</title>
+  <meta name="description" content="Designing, proving, and validating a finite-time adaptive sliding mode controller for an underactuated double-gimbal control moment gyroscope on Quanser hardware.">
+  <meta property="og:title" content="Real-time control of an underactuated gyroscope | Bogac Canbaz">
+  <meta property="og:description" content="Designing, proving, and validating a finite-time adaptive sliding mode controller for an underactuated double-gimbal control moment gyroscope on Quanser hardware.">
   <meta property="og:image" content="assets/rig.jpeg">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,12 +15,12 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <header class="site-header">
   <a class="wordmark" href="index.html">Bogac Canbaz</a>
   <nav aria-label="Site">
     <a href="index.html">About</a>
-    <a href="research.html" aria-current="page">Research</a>
-    <a href="publications.html">Publications</a>
+    <a href="portfolio.html" aria-current="page">Portfolio</a>
     <a href="assets/CV_BogacCanbaz.pdf">CV</a>
     <a href="index.html#contact">Contact</a>
   </nav>
@@ -28,27 +28,25 @@
 
 <main id="top">
 
+  <nav class="crumb" aria-label="Breadcrumb"><a href="portfolio.html">Portfolio</a> <span>Underactuated gyroscope</span></nav>
+
   <section class="page-head">
-    <h1>Research</h1>
-    <p class="lede">
-      Three pieces of work, each taken from a model through to measured results on hardware.
-      The first is my dissertation, the second an estimator built for it, and the third the power electronics work that preceded them.
-    </p>
+    <h1>Real-time control of an underactuated double-gimbal control moment gyroscope</h1>
+    <p class="lede">PhD research, 2022 to 2026. University of Nebraska-Lincoln, advised by Wei Qiao and Liyan Qu.</p>
   </section>
 
   <section class="hero">
-    <video src="assets/udgcmg.mp4" poster="assets/rig.jpeg" autoplay muted loop playsinline aria-label="The gyroscope rig tracking a reference trajectory under adaptive sliding mode control"></video>
+    <video src="assets/udgcmg.mp4" poster="assets/rig.jpeg" autoplay muted loop playsinline aria-label="The gyroscope rig tracking a reference trajectory"></video>
     <figcaption>
-      The rig: a spinning rotor inside two motorized gimbals, all mounted in an outer frame that has no motor of its own.
+      A spinning rotor inside two motorized gimbals, all mounted in an outer frame that has no motor of its own.
       The controller moves the two gimbals so that the unpowered frame follows a commanded trajectory.
     </figcaption>
   </section>
 
-<section id="research" class="section section--flush">
-
-    <article class="project">
+  <section class="section section--flush">
+<article class="project">
       <div class="project-text">
-        <h3>Real-time control of an underactuated double-gimbal control moment gyroscope</h3>
+        <h2 class="proj-h">Real-time control of an underactuated double-gimbal control moment gyroscope</h2>
         <p class="project-meta">PhD dissertation, 2022 to 2026. Advisors: Wei Qiao and Liyan Qu.</p>
 
         <h4>The problem</h4>
@@ -138,9 +136,10 @@
       </div>
     </article>
 
-    <article class="project">
+    
+<article class="project">
       <div class="project-text">
-        <h3>Physics-informed observer for closed-loop state and torque estimation</h3>
+        <h2 class="proj-h">Physics-informed observer for closed-loop state and torque estimation</h2>
         <p class="project-meta">PhD research, PyTorch and MATLAB/Simulink.</p>
         <p>
           The gyroscope's encoders give position only, and differentiating them amplifies quantization noise into the velocity signal the controller depends on.
@@ -162,38 +161,11 @@
       </div>
     </article>
 
-    <article class="project">
-      <div class="project-text">
-        <h3>A monolithic spring for high-frequency press-pack SiC power modules</h3>
-        <p class="project-meta">MS research, 2022 to 2024, with Jun Wang, Ekaterina Muravleva, Liyan Qu, and Jerry Hudgins.</p>
-        <p>
-          Press-pack power modules clamp semiconductor dies between electrodes with springs. The stacked stainless-steel disc springs used in IGBT modules add resistance, inductance, and thermal resistance that SiC devices switching ten times faster cannot tolerate,
-          and SiC dies are too small to press-contact at all. I designed a single beryllium-copper block with interleaved laser-cut slits that acts as the spring, the conductor, and the heat path at once, with four sintered legs bonded directly to the dies.
-        </p>
-        <p>
-          The design was optimized by scanning the slit geometry in COMSOL through LiveLink for MATLAB against a 1000 MPa body-stress limit at 650 N clamping force.
-          The chosen point gives 0.773 mm deflection, 874.7 MPa peak stress, 148 µΩ DC resistance against 856 µΩ for the disc-spring assembly it replaces, and 2.8 nH stray inductance.
-          Fabricated parts tested on an Instron frame stayed in the elastic region and recovered their shape, and measured resistance and inductance agreed with simulation.
-          This work is the basis of two U.S. patent applications on which I am a co-inventor.
-        </p>
-        <h4>Mathematical background</h4>
-        <ul class="math">
-          <li>Finite element analysis of coupled structural and electrical fields</li>
-          <li>Discrete design-space optimization under stress and deflection constraints</li>
-          <li>Skin effect and stray inductance at switching frequencies of 20 kHz</li>
-        </ul>
-      </div>
-      <div class="project-figures">
-        <figure>
-          <img src="assets/fig-spring.png" alt="Rendering of the monolithic spring and the simulated stress distribution" onerror="this.parentElement.style.display='none'">
-          <figcaption>The spring and its simulated body stress under load. Stress concentrates at the slit ends, which set the slit-width limit.</figcaption>
-        </figure>
-      </div>
-    </article>
+    
   </section>
 
-    <section class="section next">
-    <p>Every result above is documented in the <a href="publications.html">published papers and patents</a>.</p>
+  <section class="section next">
+    <p>Documented in four IEEE papers listed <a href="index.html#publications">here</a>. Next case study: <a href="monolithic-spring.html">the monolithic spring</a>.</p>
   </section>
 
 </main>

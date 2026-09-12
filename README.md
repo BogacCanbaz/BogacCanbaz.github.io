@@ -1,10 +1,11 @@
 # bogaccanbaz.github.io
 
-Three pages, plain HTML and CSS, no build step.
+Five pages, plain HTML and CSS, no build step.
 
-- index.html          intro and interests
-- research.html       the three projects, video, metrics
-- publications.html   papers and patents
+- index.html          about, publications, patents, contact
+- portfolio.html      hub linking to the two case studies
+- gyroscope.html      case study one
+- monolithic-spring.html  case study two
 - style.css           shared styles for all three
 
 ## assets/

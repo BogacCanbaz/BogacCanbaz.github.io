@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bogac Canbaz</title>
-  <meta name="description" content="Bogac Canbaz designs, optimizes, and validates control systems for electromechanical and multibody machines, from robotic manipulators to vehicles that move through air and water.">
-
-  <meta property="og:title" content="Bogac Canbaz">
-  <meta property="og:description" content="Control system design for electromechanical and multibody machines, taken from model to working hardware.">
+  <title>Bogac Canbaz | PhD Candidate and Control Systems Engineer</title>
+  <meta name="description" content="PhD candidate and control systems engineer working on nonlinear, robust, and adaptive control of complex electromechanical systems, validated on hardware.">
+  <meta property="og:title" content="Bogac Canbaz | PhD Candidate and Control Systems Engineer">
+  <meta property="og:description" content="PhD candidate and control systems engineer working on nonlinear, robust, and adaptive control of complex electromechanical systems, validated on hardware.">
   <meta property="og:image" content="assets/rig.jpeg">
   <meta property="og:type" content="website">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -22,10 +20,9 @@
   <a class="wordmark" href="index.html">Bogac Canbaz</a>
   <nav aria-label="Site">
     <a href="index.html" aria-current="page">About</a>
-    <a href="research.html">Research</a>
-    <a href="publications.html">Publications</a>
+    <a href="portfolio.html">Portfolio</a>
     <a href="assets/CV_BogacCanbaz.pdf">CV</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html#contact">Contact</a>
   </nav>
 </header>
 
@@ -33,21 +30,46 @@
 
   <section class="intro">
     <div class="intro-text">
-      <h1>I design control systems for machines that move, and I am not satisfied with a controller until it has run on the machine.</h1>
-      <p>
-        Most of the interesting systems in engineering are nonlinear, coupled, and harder to drive than they look.
-        A robotic arm carries its own changing inertia. A vehicle in water or air has no fixed ground to push against.
-        A gyroscopic platform has axes that no motor touches directly. What these have in common is that the dynamics do most of the work,
-        and the control engineer's job is to understand them well enough to use them.
+      <p class="eyebrow-role">PhD Candidate and Control Systems Engineer</p>
+      <h1>Bogac Canbaz</h1>
+      <p class="standfirst">
+        I am completing a PhD in Electrical Engineering at the University of Nebraska-Lincoln, graduating in December 2026,
+        and I am exploring where to take this work next once the degree is finished.
       </p>
-      <p>
-        That is the thread through everything I do: take a physical machine, model it honestly, design a feedback law that respects what the machine can actually do,
-        prove the law is stable, and then find out what the model left out by running it on hardware.
+      <p class="links">
+        <a href="mailto:bogaccanbaz@gmail.com">bogaccanbaz@gmail.com</a>
+        <a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a>
+        <a href="assets/CV_BogacCanbaz.pdf">CV (PDF)</a>
       </p>
     </div>
     <figure class="portrait">
       <img src="assets/headshot.jpeg" alt="Bogac Canbaz">
     </figure>
+  </section>
+
+  <section class="section">
+    <h2>What I do</h2>
+    <div class="prose">
+      <p>
+        I design feedback control systems for complex electromechanical machines: multibody systems whose dynamics are nonlinear,
+        whose axes are coupled to one another, and whose behavior changes with configuration, load, and wear.
+        These are the systems where a linear controller tuned at one operating point quietly stops being valid at another,
+        and where the honest answer to whether a design works can only come from the hardware.
+      </p>
+      <p>
+        The problems I want to work on sit at that boundary. How do you control a machine that has fewer actuators than degrees of freedom,
+        so that some axes can only be moved indirectly through the coupling? How do you keep a system inside its safe operating envelope
+        when the constraint is not a soft preference but a configuration the machine must never reach? How do you build a controller that stays stable
+        when the friction, the payload, and the disturbances are unknown and changing, without retuning it for every case?
+        How do you recover the states you need from the sensors you actually have, rather than the ones the model assumed?
+      </p>
+      <p>
+        My approach is to take the dynamics seriously rather than linearize them away, to prove stability and constraint satisfaction analytically before trusting a result,
+        and then to put the controller on real hardware and let the machine reveal what the model left out.
+        I have found that last step to be where the engineering actually happens.
+      </p>
+    </div>
   </section>
 
   <section class="section">
@@ -112,26 +134,36 @@
       <li><strong>Industrial automation and motion control.</strong> High-speed multi-axis actuators, smooth trajectory generation with bounded jerk, and protective logic that keeps a machine inside its safe envelope.</li>
       <li><strong>Power electronics and drives.</strong> Motor drive and inverter design, and translating electrical and thermal limits into control constraints so the hardware is never asked for more than it can survive.</li>
     </ul>
+    <p class="next-inline">The two bodies of work behind all of this are in the <a href="portfolio.html">portfolio</a>.</p>
   </section>
 
-  <section class="section">
-    <h2>Currently</h2>
-    <p class="lede">
-      I am completing a PhD in Electrical Engineering at the University of Nebraska-Lincoln, where I built the first real-time control stack reported in the literature
-      for an underactuated double-gimbal control moment gyroscope and validated it on a Quanser hardware platform.
-      Earlier I worked on multiphysics design optimization for high-frequency SiC power modules, which produced two published U.S. patent applications.
-      The full account of both is on the <a href="research.html">research page</a>.
-    </p>
+<section id="publications" class="section">
+    <h2>Publications</h2>
+    <ol class="pubs">
+      <li>B. Canbaz, L. Qu, and W. Qiao, "Adaptive linear quadratic regulator-based stabilizing control for underactuated double-gimbal control moment gyroscopes," <em>IEEE Transactions on Industry Applications</em>, 2026, <a href="https://doi.org/10.1109/TIA.2026.3653743">doi: 10.1109/TIA.2026.3653743</a>.</li>
+      <li>B. Canbaz, W. Qiao, and L. Qu, "Adaptive sliding mode-based robust control for underactuated double-gimbal control moment gyroscopes," in <em>Proc. 16th IEEE International Conference on Industry Applications (INDUSCON)</em>, 2025, pp. 918 to 925.</li>
+      <li>B. Canbaz, W. Qiao, and L. Qu, "Adaptive LQR control of underactuated double-gimbal control moment gyroscope," in <em>Proc. IEEE/IAS 61st Industrial and Commercial Power Systems Technical Conference (ICPS)</em>, Phoenix, AZ, 2024.</li>
+      <li>B. Canbaz, E. Muravleva, J. Wang, L. Qu, and J. Hudgins, "Design and optimization of a novel monolithic spring for high-frequency press-pack SiC FET modules," in <em>Proc. IEEE Energy Conversion Congress and Exposition (ECCE)</em>, Nashville, TN, 2023, pp. 5551 to 5557.</li>
+      <li>E. Muravleva, B. Canbaz, J. Wang, L. Qu, and J. Hudgins, "Switch cell design for novel high-frequency press-pack SiC FET modules," in <em>Proc. IEEE Energy Conversion Congress and Exposition (ECCE)</em>, Nashville, TN, 2023, pp. 5455 to 5461.</li>
+      <li>B. Canbaz, L. Qu, and W. Qiao, "Finite-time adaptive sliding-mode-based control for underactuated double-gimbal control moment gyroscopes," submitted to <em>IEEE Transactions on Industrial Electronics</em>, under review.</li>
+    </ol>
   </section>
 
+  <section id="patents" class="section">
+    <h2>Patents</h2>
+    <ol class="pubs">
+      <li>J. Wang, E. Muravleva, B. Canbaz, and L. Qu, "High frequency press pack SiC FET modules," published U.S. Patent Application <a href="https://patents.google.com/patent/US20260039294A1/en">US 2026/0039294 A1</a>, February 2026, patent pending.</li>
+      <li>J. Wang, B. Canbaz, E. Muravleva, and L. Qu, "Monolithic spring assemblies for high frequency press pack modules," published U.S. Patent Application <a href="https://patents.google.com/patent/US20260036180A1/en">US 2026/0036180 A1</a>, February 2026, patent pending.</li>
+    </ol>
+  </section>
+
+  
   <section id="contact" class="section contact">
     <h2>Contact</h2>
     <p>
       I am always glad to talk about control design, underactuated systems, and getting theory onto hardware.
       Reach me at <a href="mailto:bogaccanbaz@gmail.com">bogaccanbaz@gmail.com</a> or on
       <a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a>.
-      My work is indexed on <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a>,
-      and my <a href="assets/CV_BogacCanbaz.pdf">CV is here</a>.
     </p>
   </section>
 

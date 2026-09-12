@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio | Bogac Canbaz</title>
+  <meta name="description" content="Two bodies of engineering work: real-time nonlinear control of an underactuated gyroscope, and design optimization of a monolithic spring for SiC power modules.">
+  <meta property="og:title" content="Portfolio | Bogac Canbaz">
+  <meta property="og:description" content="Two bodies of engineering work: real-time nonlinear control of an underactuated gyroscope, and design optimization of a monolithic spring for SiC power modules.">
+  <meta property="og:image" content="assets/rig.jpeg">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="wordmark" href="index.html">Bogac Canbaz</a>
+  <nav aria-label="Site">
+    <a href="index.html">About</a>
+    <a href="portfolio.html" aria-current="page">Portfolio</a>
+    <a href="assets/CV_BogacCanbaz.pdf">CV</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="page-head">
+    <h1>Portfolio</h1>
+    <p class="lede">
+      Two bodies of work, each carried from first-principles modeling through analysis and simulation to measured results on physical hardware.
+    </p>
+  </section>
+
+  <section class="section section--flush">
+    <ul class="project-index">
+
+      <li>
+        <a class="project-card" href="gyroscope.html">
+          <figure><img src="assets/rig.jpeg" alt=""></figure>
+          <div>
+            <h2>Real-time control of an underactuated gyroscope</h2>
+            <p class="project-meta">PhD research, 2022 to 2026. Nonlinear and adaptive control, state estimation, hardware validation.</p>
+            <p>
+              A double-gimbal control moment gyroscope has two motors and an outer frame that no motor touches, so that frame can only be moved
+              through gyroscopic coupling, and certain gimbal angles destroy controllability outright. I built the first real-time control stack
+              reported for this configuration, watched my first controller fail on hardware in a way simulation never showed, and redesigned it
+              around the constraint that broke it.
+            </p>
+            <p class="stat-row">
+              <span><strong>0.94 s</strong> settling, against 3.02 s</span>
+              <span><strong>0.12°</strong> tracking RMS error</span>
+              <span><strong>500 Hz</strong> real-time loop</span>
+            </p>
+            <span class="card-cue">Read the case study</span>
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a class="project-card" href="monolithic-spring.html">
+          <figure><img src="assets/fig-spring.png" alt="" onerror="this.parentElement.classList.add('nofig')"></figure>
+          <div>
+            <h2>A monolithic spring for high-frequency SiC power modules</h2>
+            <p class="project-meta">MS research, 2022 to 2024. Multiphysics modeling, design optimization, fabrication and test.</p>
+            <p>
+              Press-pack power modules clamp semiconductor dies with stacked steel disc springs that add resistance, inductance, and thermal
+              resistance faster-switching SiC devices cannot tolerate. I replaced the whole stack with a single beryllium-copper block that
+              serves as spring, conductor, and heat path at once, optimized against stress and deflection limits, then built and tested it.
+            </p>
+            <p class="stat-row">
+              <span><strong>148 µΩ</strong> DC resistance, against 856 µΩ</span>
+              <span><strong>2.8 nH</strong> stray inductance</span>
+              <span><strong>2</strong> published patent applications</span>
+            </p>
+            <span class="card-cue">Read the case study</span>
+          </div>
+        </a>
+      </li>
+
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>Bogac Canbaz</span>
+  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf">CV</a></span>
+</footer>
+
+</body>
+</html>
