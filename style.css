@@ -513,3 +513,17 @@ main { max-width: 1120px; }
 @media (max-width: 900px) {
   .section > h2 { font-size: 24px; }
 }
+
+/* Portfolio thumbnails: show the whole image instead of cropping it */
+
+.project-card figure img,
+.project-card figure.nofig::after {
+  aspect-ratio: 1 / 1;
+}
+.project-card figure img {
+  object-fit: contain;
+  background: var(--paper);
+}
+@media (max-width: 860px) {
+  .project-card figure { max-width: 360px; }
+}
