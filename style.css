@@ -492,3 +492,24 @@ main { max-width: 1120px; }
     text-align: left;
   }
 }
+
+/* ================================================================
+   Readable headings: section titles and case-study subheadings
+   ================================================================ */
+
+.section > h2 {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.project h4 {
+  font-size: 20px;
+  margin: 36px 0 10px;
+}
+.capabilities dt { font-size: 18px; }
+
+@media (max-width: 900px) {
+  .section > h2 { font-size: 24px; }
+}
