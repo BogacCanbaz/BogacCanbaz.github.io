@@ -390,3 +390,105 @@ main { padding: 0 var(--gutter); max-width: 1180px; margin: 0 auto; }
 @media (max-width: 860px) {
   .project-card { grid-template-columns: 1fr; gap: 20px; }
 }
+
+/* ================================================================
+   v2 layout: single left rail, justified body text
+   ================================================================ */
+
+main { max-width: 1120px; }
+
+/* Every section becomes: heading in a fixed left rail, content beside it.
+   This gives the whole site one continuous left text edge, and lets the
+   body text run out to the right boundary of the page. */
+
+.section {
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  column-gap: 56px;
+  padding: 52px 0;
+  align-items: start;
+}
+.section > * { grid-column: 2; }
+.section > h2 {
+  grid-column: 1;
+  grid-row: 1 / span 99;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+  position: sticky;
+  top: 96px;
+}
+.section--flush { display: block; padding-top: 0; border-top: 0; }
+
+/* Justified body text, hyphenated so the spacing stays even */
+
+.prose p,
+.capabilities dd,
+.domains li,
+.lede,
+.standfirst,
+.contact p,
+.pubs li,
+.project p,
+.hero figcaption,
+.project-figures figcaption {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.links, .stat-row, .next-inline, .crumb, .project-meta { text-align: left; hyphens: manual; }
+
+/* Let the text fill the column instead of stopping short */
+
+.prose p, .capabilities dd, .lede, .contact p, .domains, .pubs { max-width: none; }
+.project p, .math, .metrics { max-width: none; }
+
+/* Intro: portrait sits in the rail, so the name and the section
+   headings below share one vertical line */
+
+.intro {
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  column-gap: 56px;
+  align-items: start;
+  padding: 68px 0 52px;
+}
+.intro .portrait { grid-column: 1; margin: 0; padding: 0; max-width: none; order: 0; }
+.intro .portrait img { width: 232px; height: 232px; object-fit: cover; }
+.intro-text { grid-column: 2; }
+.intro h1 {
+  font-size: clamp(36px, 4.6vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 2px 0 18px;
+}
+.eyebrow-role { font-size: 15px; letter-spacing: 0.02em; margin: 0 0 10px; }
+.standfirst { font-size: 20px; line-height: 1.5; max-width: none; margin: 0; }
+.intro .links { margin-top: 28px; gap: 10px 26px; }
+
+/* Capabilities read better stacked now that the rail carries the structure */
+
+.capabilities > div { grid-template-columns: 1fr; gap: 6px; padding: 20px 0; }
+.capabilities > div:first-child { padding-top: 0; border-top: 0; }
+.capabilities dt { font-size: 17px; }
+
+.domains { margin-top: 24px; }
+.domains li { padding-right: 0; }
+
+.pubs { padding-left: 22px; }
+
+@media (max-width: 900px) {
+  .section, .intro { grid-template-columns: 1fr; column-gap: 0; }
+  .section > * , .intro-text, .intro .portrait { grid-column: 1; }
+  .section > h2 { grid-row: auto; position: static; margin-bottom: 24px; }
+  .intro .portrait { margin-bottom: 24px; }
+  .intro .portrait img { width: 168px; height: 168px; }
+}
+
+@media (max-width: 560px) {
+  .prose p, .capabilities dd, .domains li, .lede, .standfirst, .contact p, .pubs li {
+    text-align: left;
+  }
+}

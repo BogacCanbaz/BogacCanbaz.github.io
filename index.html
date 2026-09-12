@@ -29,15 +29,15 @@
 <main id="top">
 
   <section class="intro">
+    <figure class="portrait">
+      <img src="assets/headshot.jpeg" alt="Bogac Canbaz">
+    </figure>
     <div class="intro-text">
       <p class="eyebrow-role">PhD Candidate and Control Systems Engineer</p>
       <h1>Bogac Canbaz</h1>
       <p class="standfirst">
-        I am a PhD candidate in Electrical Engineering at the University of Nebraska-Lincoln, graduating in December 2026. I design optimal and nonlinear control algorithms from first principles and prove them on hardware under hard real-time constraints.
-
-My dissertation built the first real-time control stack reported in the literature for an underactuated gyroscopic system, a machine with fewer actuators than degrees of freedom and a singular configuration it must never reach. My first design passed every check in simulation and then failed on the rig, close to that singularity. Rebuilding it as a constrained nonlinear controller, one that carries the limit inside the control law rather than assuming the plant will stay away from it, produced a system that settles faster, tracks more accurately, and holds the machine inside its safe envelope throughout.
-
-I work across the whole path: deriving the dynamics, formulating the cost and constraint terms, deploying generated code onto real-time targets, and defining the gates a controller has to clear before it is allowed anywhere near the hardware. I am drawn to complex electromechnaical systems, where controls is the layer that turns planned intent into motion that is precise, smooth, and safe.
+        I am a PhD candidate in Electrical Engineering at the University of Nebraska-Lincoln, graduating in December 2026.
+        I design optimal and nonlinear control algorithms from first principles and prove them on hardware under hard real-time constraints.
       </p>
       <p class="links">
         <a href="mailto:bogaccanbaz@gmail.com">bogaccanbaz@gmail.com</a>
@@ -46,9 +46,6 @@ I work across the whole path: deriving the dynamics, formulating the cost and co
         <a href="assets/CV_BogacCanbaz.pdf">CV (PDF)</a>
       </p>
     </div>
-    <figure class="portrait">
-      <img src="assets/headshot.jpeg" alt="Bogac Canbaz">
-    </figure>
   </section>
 
   <section class="section">
@@ -61,16 +58,25 @@ I work across the whole path: deriving the dynamics, formulating the cost and co
         and where the honest answer to whether a design works can only come from the hardware.
       </p>
       <p>
+        My dissertation built the first real-time control stack reported in the literature for an underactuated gyroscopic system,
+        a machine with fewer actuators than degrees of freedom and a singular configuration it must never reach.
+        My first design passed every check in simulation and then failed on the rig, close to that singularity.
+        Rebuilding it as a constrained nonlinear controller, one that carries the limit inside the control law rather than
+        assuming the plant will stay away from it, produced a system that settles faster, tracks more accurately,
+        and holds the machine inside its safe envelope throughout.
+      </p>
+      <p>
+        I work across the whole path: deriving the dynamics, formulating the cost and constraint terms, deploying generated code
+        onto real-time targets, and defining the gates a controller has to clear before it is allowed anywhere near the hardware.
+        I am drawn to complex electromechanical systems, where controls is the layer that turns planned intent into motion
+        that is precise, smooth, and safe.
+      </p>
+      <p>
         The problems I want to work on sit at that boundary. How do you control a machine that has fewer actuators than degrees of freedom,
         so that some axes can only be moved indirectly through the coupling? How do you keep a system inside its safe operating envelope
         when the constraint is not a soft preference but a configuration the machine must never reach? How do you build a controller that stays stable
         when the friction, the payload, and the disturbances are unknown and changing, without retuning it for every case?
         How do you recover the states you need from the sensors you actually have, rather than the ones the model assumed?
-      </p>
-      <p>
-        My approach is to take the dynamics seriously rather than linearize them away, to prove stability and constraint satisfaction analytically before trusting a result,
-        and then to put the controller on real hardware and let the machine reveal what the model left out.
-        I have found that last step to be where the engineering actually happens.
       </p>
     </div>
   </section>
@@ -140,7 +146,7 @@ I work across the whole path: deriving the dynamics, formulating the cost and co
     <p class="next-inline">The two bodies of work behind all of this are in the <a href="portfolio.html">portfolio</a>.</p>
   </section>
 
-<section id="publications" class="section">
+  <section id="publications" class="section">
     <h2>Publications</h2>
     <ol class="pubs">
       <li>B. Canbaz, L. Qu, and W. Qiao, "Adaptive linear quadratic regulator-based stabilizing control for underactuated double-gimbal control moment gyroscopes," <em>IEEE Transactions on Industry Applications</em>, 2026, <a href="https://doi.org/10.1109/TIA.2026.3653743">doi: 10.1109/TIA.2026.3653743</a>.</li>
@@ -160,7 +166,6 @@ I work across the whole path: deriving the dynamics, formulating the cost and co
     </ol>
   </section>
 
-  
   <section id="contact" class="section contact">
     <h2>Contact</h2>
     <p>
