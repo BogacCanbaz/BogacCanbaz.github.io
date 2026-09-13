@@ -687,3 +687,85 @@ main { max-width: 1120px; }
   .contents li { grid-template-columns: 2.2em minmax(0, 1fr); }
   .contents li span { grid-column: 2; white-space: normal; }
 }
+
+/* ================================================================
+   Octagonal portrait
+   ================================================================ */
+
+/* Regular octagon: each corner is cut back by 1 / (2 + sqrt 2) of the side,
+   so all eight edges come out the same length */
+.portrait img {
+  clip-path: polygon(29.29% 0, 70.71% 0, 100% 29.29%, 100% 70.71%,
+                     70.71% 100%, 29.29% 100%, 0 70.71%, 0 29.29%);
+}
+
+/* ================================================================
+   Dark theme
+   theme.js sets data-theme on <html>; every color on the site comes
+   from these variables, so swapping them is the whole theme
+   ================================================================ */
+
+:root { color-scheme: light; }
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e4e8ed;
+  --ink-soft: #a0aab5;
+  --rule: #2b333d;
+  --paper: #11161c;
+  --paper-soft: #1a2129;
+  --accent: #86b6e3;
+  --accent-ink: #b3d1ee;
+}
+
+/* Theme switch, placed at the right end of the header */
+
+.site-header { justify-content: flex-start; }
+.site-header nav { margin-left: auto; }
+
+.theme-toggle {
+  flex: none;
+  align-self: center;
+  position: relative;
+  width: 46px;
+  height: 24px;
+  margin-left: 26px;
+  padding: 0;
+  border: 1px solid var(--ink-soft);
+  background: transparent;
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--ink); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  transition: transform 0.2s ease;
+}
+.theme-toggle[aria-checked="true"] .theme-toggle-knob { transform: translateX(22px); }
+@media (prefers-reduced-motion: reduce) { .theme-toggle-knob { transition: none; } }
+
+.theme-toggle svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.theme-toggle .icon-moon { display: none; fill: currentColor; stroke: none; }
+.theme-toggle[aria-checked="true"] .icon-sun { display: none; }
+.theme-toggle[aria-checked="true"] .icon-moon { display: block; }
+
+@media (max-width: 520px) {
+  .site-header nav { margin-left: 0; }
+  .theme-toggle { position: absolute; top: 24px; right: var(--gutter); margin: 0; }
+}
