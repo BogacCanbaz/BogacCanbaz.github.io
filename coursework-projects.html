@@ -23,7 +23,7 @@
     <a href="index.html">About</a>
     <a href="portfolio.html" aria-current="page">Portfolio</a>
     <a href="coursework.html">Coursework</a>
-    <a href="assets/CV_BogacCanbaz.pdf">CV</a>
+    <a href="assets/CV_BogacCanbaz.pdf" target="_blank" rel="noopener">CV</a>
     <a href="index.html#contact">Contact</a>
   </nav>
 </header>
@@ -56,73 +56,99 @@
         <p class="proj-index" aria-hidden="true">1</p>
         <p class="proj-eyebrow"><strong>Project 1 of 5.</strong> ECEN 828 Power Electronics, Prof. Jun Wang. Term project, team of two.</p>
         <h2 class="proj-h">A dual-output flyback converter, from the magnetics up</h2>
-        <p class="project-meta">Design, PLECS simulation, transformer fabrication, PCB assembly, and hardware qualification. 2021.</p>
+        <p class="project-meta">Design, PLECS simulation, transformer construction, PCB assembly, and bench qualification. December 2021.</p>
 
         <h4>The problem</h4>
         <p>
-          A flyback converter is the smallest way to build an isolated power supply: one switch, one coupled inductor, one diode per output.
-          The specification was an 18 to 30 V input and a regulated ±15 V dual output at 0.3 A per channel, 9 W in total, switching at 100 kHz in
-          discontinuous conduction across the whole input range, with better than 80% efficiency and no forced cooling.
-          The controller, a peak-current-mode LM2587, and every semiconductor on the board were fixed by the project.
-          The coupled inductor was not. It had to be designed, wound, characterized, and made to work.
+          A flyback converter is a simple switch-mode power supply: one switch, one coupled inductor, one diode per output.
+          The specification was an 18 to 24 V dc input converted to a ±15 V dual output within 4% tolerance, with the converter kept in discontinuous
+          conduction and an efficiency above 80%. We loaded each output with 50 Ω. The converter followed the reference board design and its bill of materials,
+          built around a Texas Instruments LM2587T-ADJ controller with an integrated 65 V, 5 A switch, a fixed 100 kHz oscillator, and current-mode control.
+          The coupled inductor was ours to design, build, measure, and make work.
         </p>
 
-        <h4>What I built</h4>
+        <h4>What we built</h4>
         <p>
-          The design started with two operating points. For continuous and for discontinuous conduction I derived the turns ratio, magnetizing inductance,
-          and duty cycle that meet the specification at rated load, bounded by the 65 V switch rating, the 40 V output diodes, and the 30 V clamp on the primary,
-          then checked both in a Level-1 PLECS model with an ideal coupled inductor. The discontinuous design carried forward: magnetizing inductance set at the
-          minimum input voltage so the converter never crosses into continuous conduction, peak flux density held below half of saturation, and the maximum duty cycle
-          capped at 0.6 so that peak-current-mode control stays stable. A Level-2 PLECS model then added the core, the air gap, the leakage inductance,
-          and the winding resistance that the real part would have.
+          This was a joint project with Kashfia Tajmin Nabila; we did the calculations, the simulations, and the lab work together rather than dividing them up.
+          From the 65 V switch rating and the 40 V rating of the output diodes we bounded the turns ratio to between 0.96 and 2.00 and chose 1.33:1:1, close to one of
+          the two ratios Dr. Wang recommended. With 50 Ω loads, 100 kHz switching, and a design duty cycle of 0.5 against the controller's 0.6 limit, the discontinuous
+          conduction condition put the magnetizing inductance below 35.33 µH, and we started the design at 13 µH. A Level 1 PLECS model with 0.2 µH of leakage inductance
+          gave 15.04 V on each output at both 18 V and 24 V input, with efficiency above 80% and a duty cycle near 0.2. A Level 2 model then added the core, the air gap,
+          and the leakage of the transformer we intended to build; at 24 V input it ran at a duty cycle of 0.256 with a peak flux density of 0.21 T, below the 0.32 T
+          saturation limit of the core.
         </p>
         <p>
-          Then the part itself. A Ferroxcube E25/13/7 core in 3C94 ferrite, Litz-wire windings, and a Kapton-tape air gap, wound by hand and measured on an LCR meter
-          for magnetizing inductance, leakage inductance, and dc and ac winding resistance. Iterations went back to the bobbin until the measured values sat within
-          tolerance of the design. Only then were the transformer and the rest of the bill of materials soldered onto the PCB.
+          Then the part itself. The core was a Ferroxcube EE 25/13/7 in 3C94 ferrite. With a peak magnetizing current of 5.23 A from the simulation and a design flux
+          density of 0.25 T, the air gap came out at 0.137 mm and the primary at about five turns; we set the gap to 0.2 mm with two layers of Kapton tape and wound
+          the transformer with Litz wire. Three transformers were needed. The first, wound 6:4:4, measured 11.13 µH of primary inductance and 0.57 µH of leakage;
+          its inductance was too small, and when the board was powered the bench supply went into constant-current mode and the transistor heated. The second, 8:6:6
+          with interleaved windings, raised the primary inductance to 12.83 µH but improved the leakage by only 0.06 µH, and its board gave only 2.6 V, then 3 V with
+          the potentiometer; the cause was a 1.6 kΩ resistor fitted at R2 in place of 18 kΩ, and the board was damaged removing it. The third, 8:6:6 without
+          interleaving, measured 12.22 µH of primary inductance and 0.48 µH of leakage with the secondaries shorted on an LCR meter, a coupling factor of 0.98,
+          and on a fresh board it ran as designed.
         </p>
 
         <h4>On the bench</h4>
         <p>
-          Qualification meant running the converter into 50 Ω per channel and holding both outputs within ±4% of 15 V for three minutes each at 24 V, 18 V, and 30 V input,
-          while input and output power were logged to compute the efficiency. The prototype passed at all three input voltages.
+          Qualification meant running the converter into 50 Ω per channel, two 100 Ω resistors in parallel, and holding both outputs within 4% of 15 V for three
+          minutes at each of 18 V and 24 V input, with all signals read as RMS values on the oscilloscope for the efficiency calculation. At 18 V input the converter
+          drew 0.64 A and delivered 15.0 V at 0.330 A on the positive output and 14.8 V at 0.324 A on the negative, an efficiency of 84.6%. At 24 V it drew 0.48 A and
+          delivered 15.0 V at 0.331 A and 14.9 V at 0.324 A, an efficiency of 85.0%. Both outputs stayed within tolerance for the full six minutes of testing.
+          The switching transistor was hot after the 18 V run, so we let the board cool before the 24 V test, and for the same reason we did not push the output
+          above 15 V with the potentiometer, which allows adjustment from about 10 V to more than 15 V. The improvement we proposed is a transformer with lower
+          leakage inductance, for higher efficiency.
         </p>
         <table class="metrics spec">
-          <caption>Converter specification the prototype was qualified against</caption>
+          <caption>Design targets and test conditions</caption>
           <thead>
-            <tr><th scope="col">Property</th><th scope="col">Requirement</th></tr>
+            <tr><th scope="col">Property</th><th scope="col">Value</th></tr>
           </thead>
           <tbody>
-            <tr><th scope="row">Input voltage</th><td>18 to 30 V</td></tr>
-            <tr><th scope="row">Output</th><td>±15 V, within ±4%</td></tr>
-            <tr><th scope="row">Rated output</th><td>0.3 A per channel, 9 W total</td></tr>
-            <tr><th scope="row">Conduction mode at rated load</th><td>Discontinuous over the full input range</td></tr>
-            <tr><th scope="row">Switching frequency</th><td>100 kHz</td></tr>
-            <tr><th scope="row">Efficiency, natural convection</th><td>Above 80%</td></tr>
+            <tr><th scope="row">Input voltage</th><td>18 to 24 V dc</td></tr>
+            <tr><th scope="row">Output</th><td>±15 V, within 4%</td></tr>
+            <tr><th scope="row">Load</th><td>50 Ω per channel</td></tr>
+            <tr><th scope="row">Conduction mode</th><td>Discontinuous, magnetizing inductance below 35.33 µH</td></tr>
+            <tr><th scope="row">Switching frequency</th><td>100 kHz, fixed by the LM2587</td></tr>
+            <tr><th scope="row">Duty cycle limit</th><td>Below 0.6</td></tr>
+            <tr><th scope="row">Efficiency</th><td>Above 80%</td></tr>
+          </tbody>
+        </table>
+        <table class="metrics spec">
+          <caption>Measured on the bench, three minutes at each input voltage</caption>
+          <thead>
+            <tr><th scope="col">Input</th><th scope="col">Result</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">18 V, drawing 0.64 A</th><td>15.0 V at 0.330 A and 14.8 V at 0.324 A out, 84.6% efficiency</td></tr>
+            <tr><th scope="row">24 V, drawing 0.48 A</th><td>15.0 V at 0.331 A and 14.9 V at 0.324 A out, 85.0% efficiency</td></tr>
           </tbody>
         </table>
 
         <h4>Mathematical background</h4>
         <ul class="math">
-          <li>Steady-state converter analysis by inductor volt-second and capacitor charge balance; the boundary between continuous and discontinuous conduction</li>
-          <li>Flyback transformer design: turns ratio from device voltage ratings, magnetizing inductance from the conduction-mode requirement, air gap from peak flux density</li>
-          <li>Core loss and winding loss estimation, Litz wire and skin depth at 100 kHz</li>
-          <li>Peak-current-mode control and its subharmonic instability above 50% duty cycle</li>
+          <li>The boundary between continuous and discontinuous conduction, K &lt; K<sub>crit</sub>(D), used to bound the magnetizing inductance</li>
+          <li>Flyback transformer design: turns ratio from the switch and diode voltage ratings, air gap and turn count from peak magnetizing current and flux density</li>
+          <li>Coupling factor and leakage inductance: with k = 0.98, leakage is about 4% of the primary inductance</li>
+          <li>Litz wire and skin depth at 100 kHz</li>
         </ul>
       </div>
 
       <div class="project-figures">
         <figure>
-          <img src="assets/fig-flyback-prototype.jpg" alt="The assembled flyback converter PCB with the hand-wound coupled inductor" onerror="this.parentElement.style.display='none'">
-          <figcaption>The assembled converter with the hand-wound coupled inductor on the E25/13/7 core.</figcaption>
+          <img src="assets/fig-flyback-prototype.jpg" alt="The assembled flyback converter PCB with the Kapton-taped coupled inductor, wired to 100 ohm power resistors on a breadboard with oscilloscope probes attached" onerror="this.parentElement.style.display='none'">
+          <figcaption>The assembled converter on the bench, with the transformer we built under its Kapton tape and the 100 Ω power resistors of the load.</figcaption>
         </figure>
         <figure>
-          <img src="assets/fig-flyback-transformer.jpg" alt="The coupled inductor being measured on an LCR meter" onerror="this.parentElement.style.display='none'">
-          <figcaption>Characterizing the transformer on the LCR meter before it was allowed near the board.</figcaption>
+          <img src="assets/fig-flyback-transformer.jpg" alt="A Keysight U1733C handheld LCR meter reading 12.22 microhenries with the E-core transformer held in its clip leads" onerror="this.parentElement.style.display='none'">
+          <figcaption>The final transformer on the LCR meter, reading 12.22 µH of primary inductance. The 0.48 µH of leakage was measured separately with the secondaries shorted.</figcaption>
         </figure>
         <figure>
-          <img src="assets/fig-flyback-waveforms.png" alt="Simulated switch current and output voltage of the discontinuous-mode flyback converter" onerror="this.parentElement.style.display='none'">
-          <figcaption>Level-2 PLECS waveforms of the discontinuous-mode design.</figcaption>
+          <img src="assets/fig-flyback-topology.png" alt="PLECS schematic of a dual-output flyback converter with an 18 V source, a magnetizing inductance, a MOSFET switch, and two secondary windings each feeding a diode, a capacitor, and a load at plus and minus 15 V" onerror="this.parentElement.style.display='none'">
+          <figcaption>The dual-output flyback topology as drawn in PLECS: one switch on the primary, one diode and capacitor per secondary, and a ±15 V pair of outputs.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-flyback-bench-24v.jpg" alt="Oscilloscope and bench supply during the 24 V qualification run, with RMS readouts of 24.0 V input and 15.0 V and 14.9 V outputs" onerror="this.parentElement.style.display='none'">
+          <figcaption>The 24 V qualification run: the oscilloscope reading 24.0 V in and 15.0 V and 14.9 V out as RMS values, with the bench supply at 24.0 V.</figcaption>
         </figure>
       </div>
     </article>
@@ -133,31 +159,42 @@
         <p class="proj-index" aria-hidden="true">2</p>
         <p class="proj-eyebrow"><strong>Project 2 of 5.</strong> ECEN 898 Modeling and Control of Three-Phase Power Converters, Prof. Jun Wang. Term project, team of three.</p>
         <h2 class="proj-h">A permanent-magnet machine drive, emulated with two inverters and controlled on a DSP</h2>
-        <p class="project-meta">dq-frame current control, phase-locked loop design, PLECS switching and processor-in-the-loop simulation, deployment on TI C2000 hardware. 2022.</p>
+        <p class="project-meta">dq-frame current control, phase-locked loop design, PLECS switching and processor-in-the-loop simulation, deployment on TI C2000 hardware. May 2022.</p>
 
         <h4>The problem</h4>
         <p>
-          Testing a motor drive on a real motor means a shaft, a load, and many ways to break something. This platform replaces the machine with a second inverter.
-          VSI-2 synthesizes the back-EMF of a permanent-magnet machine whose electrical frequency sweeps between 30 and 60 Hz every few seconds, with voltage proportional
-          to frequency as in a real machine. VSI-1 is the drive under test. Its job is to hold the dq-frame phase current at a constant 1 A on the q axis and zero on the d axis,
-          within ±0.05 A of switching-cycle-averaged variation, while the frequency, the back-EMF amplitude, and the unregulated dc bus on the far side all move.
-          The only measurements available were the three phase currents, the line-to-line back-EMF voltages, and the bus voltage.
+          This platform replaces the machine in a drive test with a second inverter. VSI-2 is open-loop, feedforward controlled to synthesize the back-EMF of a
+          permanent-magnet machine whose electrical frequency follows a 4 s cycle: 1 s at 60 Hz, a 1 s ramp down to 30 Hz, 1 s there, and a 1 s ramp back up, with the
+          q-axis back-EMF proportional to frequency, 6 V at 60 Hz and 3 V at 30 Hz. VSI-1 is the drive under test. Its job is to hold the dq-frame phase current at a
+          constant 1 A on the q axis and zero on the d axis, within ±0.05 A of switching-cycle-averaged variation, while the frequency, the back-EMF amplitude, and the
+          unregulated capacitor voltage on the emulator side, anywhere from 10 to 20 V depending on the power VSI-2 absorbs, all move. The only signals that could be
+          sensed were the three phase currents, the line-to-line back-EMF voltages, and that capacitor voltage.
         </p>
 
         <h4>What I did</h4>
         <p>
-          My share of the design was the steady-state operating point of the drive, the phase-locked loop, and the full switching simulation.
-          From the dq averaged model of the inverter and the RL link I computed the phase-to-neutral and line-to-line duty cycles that produce the commanded current
-          at each back-EMF frequency. The phase-locked loop locks to the filtered line-to-line back-EMF so that the current controller can work in a rotating frame aligned
-          with the machine; it had to be fast enough to track the frequency sweep and keep at least 45 degrees of phase margin, with the RC sensing filters, the half-period
-          PWM delay, and the one-period computation delay all modeled in the loop. The switching model of the complete system, both inverters, both modulators
-          (third-harmonic-injection PWM for the machine emulator and minimum-loss center-aligned space-vector modulation for the drive), the phase-locked loop, the current
-          controllers, and the time-varying back-EMF, was my simulation to build and run before anything touched hardware.
+          The eleven problems in the assignment were split among the three of us, and the last three were shared. My share was the steady-state operating point of the
+          drive, the phase-locked loop, and the switching simulation of the complete system. From the dq averaged model of VSI-1 and the RL link, with the capacitor open
+          and the inductor shorted at steady state, I solved for the duty cycles that produce the commanded current at 60, 45, and 30 Hz: q-axis phase-to-neutral duties
+          of 0.47, 0.395, and 0.32, a small negative d-axis duty, and dc-side currents of 0.47, 0.395, and 0.32 A. The phase-locked loop locks to the filtered
+          line-to-line back-EMF so that the current controllers can work in a frame aligned with the emulated machine. I tuned its PI gains to kp = 7.5 and ki = 750,
+          which with the 2 kHz RC sensing filter in the loop gave an 18.82 Hz bandwidth and 49.2 degrees of phase margin against the 45 degree requirement, and I offset
+          the PLL angle by 121.72 degrees to cover the 120 degree shift of the line-to-line q voltage plus the 1.72 degree lag of the filter at 60 Hz. The current
+          controllers were my teammates' design: PI gains of Kp = 1.3 and Ki = 130 with decoupling terms and a first-order Pade model of the half-period PWM delay, the
+          one-period computation delay, and the filter delay, for a 1.2 kHz bandwidth at 45.5 degrees of phase margin. I then built the switching model of the whole
+          system in PLECS: both inverters, third-harmonic-injection PWM for the machine emulator, minimum-loss center-aligned space-vector modulation for the drive
+          written as a C-Script, the phase-locked loop, the current controllers, and the time-varying back-EMF. Once the startup transient settled, the switching-cycle
+          averages of id and iq stayed inside the ±0.05 A band through the frequency cycle while the emulator-side capacitor voltage swung between about 14 and 20 V.
+          The Bode plot of the RC filter and PLL came from a MATLAB script.
         </p>
         <p>
-          The last steps were shared across the team. Controller code was generated from the PLECS model with PLECS Coder and checked processor-in-the-loop against the
-          simulation, the models were revised with the measured sensor gains and filter values, and the code was loaded onto two TI LAUNCHXL-F28069M boards driving a pair of
-          BOOSTXL-DRV8301 inverter stages, with dead time and overcurrent protection configured in the firmware.
+          The last steps were shared across the team. We generated the controller code from the PLECS model with PLECS Coder, with the PI controllers and the PLL
+          integrator converted to z-domain form, and checked it processor-in-the-loop on a TI LAUNCHXL-F28069M, where the dq currents again stayed within the band.
+          We then set the sensor gains and offsets from the LAUNCHXL-F28069M and BOOSTXL-DRV8301 datasheets, shifted the PLL's initial angle to absorb a 2.7 ms delay
+          between the back-EMF and drive phase voltages, and loaded the generated Code Composer Studio code onto two LAUNCHXL-F28069M boards. On the bench the processor
+          controlling the drive locked to the emulated back-EMF frequency, and the measured phase current, averaged over a switching period, showed a 2 ms zero-crossing
+          offset from the back-EMF at 60 Hz against 0.6 ms in simulation. One lesson stuck: a PLL initial angle constant that had not been converted to radians was only
+          caught while debugging the hardware.
         </p>
 
         <table class="metrics spec">
@@ -166,7 +203,8 @@
             <tr><th scope="col">Quantity</th><th scope="col">Value</th></tr>
           </thead>
           <tbody>
-            <tr><th scope="row">dc bus</th><td>20 V</td></tr>
+            <tr><th scope="row">Drive dc bus</th><td>20 V</td></tr>
+            <tr><th scope="row">Emulator-side capacitor voltage</th><td>10 to 20 V, unregulated</td></tr>
             <tr><th scope="row">Interface inductance and resistance per phase</th><td>3.44 mH, 3.4 Ω</td></tr>
             <tr><th scope="row">Emulated back-EMF</th><td>30 to 60 Hz, 3 to 6 V on the q axis</td></tr>
             <tr><th scope="row">Current command, dq frame</th><td>0 A, 1 A</td></tr>
@@ -180,7 +218,7 @@
         <ul class="math">
           <li>Power-invariant Clarke and Park transformations, phase and line-to-line representations of three-phase variables</li>
           <li>Switching and averaged models of the voltage source inverter in stationary and rotating frames</li>
-          <li>Small-signal loop design with sampling, PWM, and computation delays; discrete-time implementation of the compensators</li>
+          <li>Small-signal loop design with the sensor filter, PWM, and computation delays folded into a first-order Pade approximation; discrete-time implementation of the compensators</li>
           <li>Phase-locked loop as a feedback loop: bandwidth against phase margin, and the effect of the sensing filters</li>
           <li>Carrier-based space-vector modulation and third-harmonic injection</li>
         </ul>
@@ -188,16 +226,20 @@
 
       <div class="project-figures">
         <figure>
-          <img src="assets/fig-pmdrive-bench.jpg" alt="Two TI LAUNCHXL-F28069M boards and BOOSTXL-DRV8301 inverter stages connected through the RL link" onerror="this.parentElement.style.display='none'">
-          <figcaption>The platform: two inverter stages on two microcontroller boards, joined by the three-phase RL link.</figcaption>
+          <img src="assets/fig-pmdrive-bench.jpg" alt="Lab bench with a Tektronix oscilloscope showing four traces, two TI LAUNCHXL-F28069M boards with BOOSTXL-DRV8301 inverter stages, toroidal link inductors, and a bench power supply" onerror="this.parentElement.style.display='none'">
+          <figcaption>The platform on the bench: two LAUNCHXL-F28069M boards with their inverter stages, the toroidal link inductors, and the scope showing the drive voltage, the emulated back-EMF, the emulator-side capacitor voltage, and one phase current.</figcaption>
         </figure>
         <figure>
-          <img src="assets/fig-pmdrive-block.png" alt="Control block diagram of the drive in the dq frame with PLL, current controllers, and delay models" onerror="this.parentElement.style.display='none'">
-          <figcaption>The dq-frame control structure, with the phase-locked loop feeding the frame angle to the current controllers.</figcaption>
+          <img src="assets/fig-pmdrive-block.png" alt="PLECS block diagram of the dq current controllers with PI blocks on the d and q current errors, a decoupling box scaled by the back-EMF frequency, and first-order Pade delay blocks producing the d and q duty cycles" onerror="this.parentElement.style.display='none'">
+          <figcaption>The dq current controllers as modeled in PLECS: PI compensators on the d and q current errors, decoupling terms scaled by the frequency estimate from the phase-locked loop, and first-order Pade blocks standing in for the PWM and computation delays.</figcaption>
         </figure>
         <figure>
-          <img src="assets/fig-pmdrive-idq.png" alt="Simulated dq currents of the drive as the emulated back-EMF frequency sweeps between 30 and 60 Hz" onerror="this.parentElement.style.display='none'">
-          <figcaption>dq currents through the frequency sweep in the full switching simulation.</figcaption>
+          <img src="assets/fig-pmdrive-idq.png" alt="Four stacked simulation plots over 4 seconds: the back-EMF frequency ramping from 60 to 30 Hz and back, the d-axis current settling to zero, the q-axis current settling to 1 A, and their switching-cycle averages" onerror="this.parentElement.style.display='none'">
+          <figcaption>My switching simulation over one frequency cycle: after the startup transient the d-axis current holds near zero and the q-axis current near 1 A while the back-EMF frequency ramps from 60 to 30 Hz and back.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-pmdrive-scope-sweep.png" alt="Oscilloscope capture over 8 seconds with four traces: the PWM line voltage from the drive, the emulated back-EMF whose amplitude rises and falls with the sweep, the emulator-side capacitor voltage moving between about 12 and 18 V, and one phase current" onerror="this.parentElement.style.display='none'">
+          <figcaption>Hardware capture over two frequency cycles: the drive's PWM line voltage (yellow), the emulated line-to-line back-EMF rising and falling with the sweep (cyan), the emulator-side capacitor voltage moving between roughly 12 and 18 V (red), and the phase A current (green).</figcaption>
         </figure>
       </div>
     </article>
@@ -206,9 +248,9 @@
     <article class="project project--numbered" id="robotics">
       <div class="project-text">
         <p class="proj-index" aria-hidden="true">3</p>
-        <p class="proj-eyebrow"><strong>Project 3 of 5.</strong> MECH 892 Special Topics in Robotics, Prof. Carl Nelson. Coding assignments and term report, individual.</p>
+        <p class="proj-eyebrow"><strong>Project 3 of 5.</strong> MECH 892 Special Topics in Robotics, Prof. Carl Nelson. Coding assignments and an individual literature review.</p>
         <h2 class="proj-h">Parallel robot kinematics and the dynamics of a four-axis arm</h2>
-        <p class="project-meta">Workspace and singularity analysis in code, configuration-space search, and a report on manipulator dynamics and control. 2023.</p>
+        <p class="project-meta">Workspace and singularity analysis in code, configuration-space search, and a literature review on manipulator dynamics and control. 2023.</p>
 
         <p>
           The course was a tour of robot architectures that are not serial arms: parallel and cable-driven mechanisms, compliant and soft actuators, origami-inspired
@@ -219,8 +261,16 @@
           relations to size an actuator against a spring load.
         </p>
         <p>
-          The term report took the modeling side further: Euler-Lagrange dynamics of a four-degree-of-freedom arm, and a comparison of the control strategies the literature
-          has applied to it, from PID through differential-evolution-tuned and fuzzy-logic PID.
+          The term report was an individual literature review of the dynamics and control of a four-degree-of-freedom arm. Following the referenced work, I wrote out the
+          Euler-Lagrange motion equations as a 4 by 4 coefficient matrix on the joint accelerations plus a second 4 by 4 matrix on the joint velocities, with coefficients
+          that depend on mass, on the joint angles, and on sinusoidal functions of those angles. The plant is highly nonlinear and its four axes are strongly coupled, and
+          the equations involve the first and second derivatives of the joint angles while the control goal is on the angles themselves, so there is no direct relation
+          between the control variable and the motion equations. With the aim of driving all four joint-angle errors to zero, I compared three controllers from the
+          literature: PID with manually tuned gain matrices, PID with gains tuned by a differential evolution algorithm, and a fuzzy-logic PID. In the responses to
+          constant target angles reproduced from the cited papers, differential evolution tuning reduced the overshoot and settling time of the manually tuned PID, and
+          the fuzzy-logic controller settled faster with lower overshoot than a two-degree-of-freedom PID at the first and third joints. The published work concentrates
+          on holding the arm at a fixed position, while industrial tasks such as welding need trajectory following, so I proposed testing these controllers on
+          time-varying trajectories and designing adaptive, robust, or sliding-mode control for the arm.
         </p>
 
         <h4>Mathematical background</h4>
@@ -229,7 +279,7 @@
           <li>Jacobians, singularity classification, and manipulability and condition-number indices</li>
           <li>Configuration-space topology and obstacle representation</li>
           <li>Screw theory: twists, wrenches, pitch, and reciprocity</li>
-          <li>Euler-Lagrange dynamics of open kinematic chains</li>
+          <li>Euler-Lagrange dynamics of a serial arm, and PID gain tuning by differential evolution and by fuzzy logic</li>
         </ul>
       </div>
 
@@ -249,9 +299,9 @@
     <article class="project project--numbered" id="learning">
       <div class="project-text">
         <p class="proj-index" aria-hidden="true">4</p>
-        <p class="proj-eyebrow"><strong>Project 4 of 5.</strong> ECEN 935 Computational Intelligence, Prof. Wei Qiao, individual project; and CSCE 878 Introduction to Machine Learning, Prof. Stephen Scott, team assignments.</p>
+        <p class="proj-eyebrow"><strong>Project 4 of 5.</strong> ECEN 935 Computational Intelligence, Prof. Wei Qiao, individual project; and CSCE 878 Introduction to Machine Learning, Prof. Stephen Scott, team project of four.</p>
         <h2 class="proj-h">Learning systems, from backpropagation to swarm optimization</h2>
-        <p class="project-meta">Particle swarm optimization of a wireless power link, and six machine learning notebooks trained on a GPU cluster. 2021 and 2023.</p>
+        <p class="project-meta">Particle swarm optimization of a wireless power link, six machine learning notebooks trained on a GPU cluster, and a proposed pipeline for Kaggle's whale and dolphin identification competition. 2021 and 2023.</p>
 
         <p>
           Two courses, two years apart, covered the learning methods that later fed into my work on physics-informed observers.
@@ -264,8 +314,15 @@
           Introduction to Machine Learning was practice. Working in a small team on the university's Swan cluster, submitting Jupyter sessions as SLURM jobs and requesting
           GPU nodes when a model needed one, we completed six notebooks: exploratory analysis and decision trees on the Iris and heart-disease data sets, naive Bayes
           sentiment classification of IMDB reviews, a convolutional network for CIFAR-10 image classification, k-means and hierarchical clustering for image segmentation,
-          hidden Markov models for sequence data, and random forests for heart-disease prediction. The course project was a proposal built around a Kaggle competition:
-          problem definition, literature review, and a proposed learning solution.
+          hidden Markov models for sequence data, and random forests for heart-disease prediction. The course project was a team report, written by four of us under the
+          team name AI Voyagers, proposing a solution to the Kaggle Happywhale competition: identifying individual whales and dolphins from the natural markings on their
+          dorsal fins, tails, heads, and lateral views in photographs taken by researchers and institutions, a matching that is otherwise done by hand. After reviewing
+          EfficientNet and ArcFace, we proposed resizing the images to 384x384 pixels for rapid validation and early model testing or 512x512 pixels to preserve finer
+          features, normalizing pixel values to a 0 to 1 scale, and augmenting with vertical flips, brightness adjustments, and rotations. The model itself had four
+          stages: a convolutional network regressing a bounding box around the animal, cropping and resizing to that box to remove background, a second convolutional
+          network producing a compact embedding of the markings, and a fully connected network or support vector machine assigning the embedding to an individual.
+          We planned to evaluate with accuracy, precision, recall, and F1-score under k-fold cross-validation and to check performance across species and populations
+          for bias. The report stopped at the proposed design and contains no training results.
         </p>
 
         <h4>Mathematical background</h4>
@@ -275,6 +332,7 @@
           <li>Bias and variance, bagging, boosting, and random forests</li>
           <li>Expectation-maximization, and the forward-backward and Viterbi algorithms for hidden Markov models</li>
           <li>Population-based stochastic optimization: particle swarms and evolutionary algorithms</li>
+          <li>Convolutional embeddings for individual identification, and k-fold cross-validation with accuracy, precision, recall, and F1-score</li>
         </ul>
       </div>
 
@@ -332,7 +390,7 @@
 
 <footer class="site-footer">
   <span>Bogac Canbaz</span>
-  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf">CV</a></span>
+  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf" target="_blank" rel="noopener">CV</a></span>
 </footer>
 
 </body>

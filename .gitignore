@@ -1,0 +1,13 @@
+# Source material kept next to the site for reference but never published.
+# Lecture handouts, homework and exam solutions, and syllabi are the
+# instructors' copyrighted material; the project reports name teammates
+# and carry their email addresses, and one is 24 MB.
+assets/advancePE_course/
+assets/files_ann/
+assets/files_mlcourse/
+assets/*Report*.pdf
+assets/HappyWhale-marked.pdf
+
+# Office junk and lock files
+assets/*.pptx
+assets/~$*

@@ -23,7 +23,7 @@
     <a href="index.html">About</a>
     <a href="portfolio.html" aria-current="page">Portfolio</a>
     <a href="coursework.html">Coursework</a>
-    <a href="assets/CV_BogacCanbaz.pdf">CV</a>
+    <a href="assets/CV_BogacCanbaz.pdf" target="_blank" rel="noopener">CV</a>
     <a href="index.html#contact">Contact</a>
   </nav>
 </header>
@@ -59,6 +59,19 @@
           so one axis is never driven directly. It has to be moved through gyroscopic coupling, and the coupling itself changes with the gimbal angles.
           At certain angles the gimbal axes line up and one control direction disappears entirely. That is gimbal lock, and a controller that wanders into it loses the plant.
           When I started, nobody had stabilized this configuration on hardware.
+        </p>
+
+        <h4>Where control moment gyroscopes are used</h4>
+        <p>
+          A control moment gyroscope exchanges angular momentum instead of spending propellant, which is why it turns up wherever something heavy has to be pointed precisely
+          without a rigid reference to push against. Every long-duration space station has flown them: Skylab carried three double-gimbal units in 1973, Mir carried banks of
+          gyrodynes, China's Tiangong carries six, and the International Space Station holds its attitude with four double-gimbal CMGs on the Z1 truss, each spinning a 100 kg
+          wheel at 6600 rpm to store 4760 Nms of momentum and deliver 258 Nm of torque without the disturbances that thrusters would put into the microgravity experiments.
+          Agile Earth-imaging satellites use clusters of small single-gimbal CMGs to swing between targets in seconds: Pleiades points a 1000 kg spacecraft at more than
+          3 degrees per second with four 45 Nm units in a pyramid, and the WorldView and Ikonos satellites fly Honeywell CMGs for the same reason. At sea, gyro stabilizers
+          such as the Seakeeper series spin a vacuum-sealed flywheel at up to 9750 rpm and precess it against the waves to remove most of a boat's roll. The same mechanism is
+          being applied to underwater vehicle orientation, robotic stabilization platforms, self-balancing two-wheeled vehicles, and the lateral stability of agricultural
+          tractors. The station units are double-gimbal CMGs, the same family as my platform, and the unpowered outer frame on my rig plays the part of the vehicle they steer.
         </p>
 
         <h4>What I built</h4>
@@ -130,6 +143,10 @@
           <figcaption>The four bodies. The rotor (D) spins inside two motor-driven gimbals (C and B), all carried by an outer frame (A) with no motor of its own, so its angle q<sub>4</sub> can only be moved through gyroscopic coupling (τ<sub>4</sub> = 0).</figcaption>
         </figure>
         <figure>
+          <img src="assets/fig-cmg-iss.jpg" alt="A NASA technician beside one of the International Space Station's control moment gyroscopes before launch" onerror="this.parentElement.style.display='none'">
+          <figcaption>One of the International Space Station's four double-gimbal control moment gyroscopes before launch: a 100 kg wheel at 6600 rpm inside its gimbal housing. NASA photograph.</figcaption>
+        </figure>
+        <figure>
           <img src="assets/fig-gimbal-lock.png" alt="Singularity boundaries of the gimbal angles, with the admissible operating cell shaded" onerror="this.parentElement.style.display='none'">
           <figcaption>Gimbal-lock boundaries in the space of the two gimbal angles. The controller keeps the gimbals inside one cell for all time.</figcaption>
         </figure>
@@ -176,7 +193,7 @@
 
 <footer class="site-footer">
   <span>Bogac Canbaz</span>
-  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf">CV</a></span>
+  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf" target="_blank" rel="noopener">CV</a></span>
 </footer>
 
 </body>
