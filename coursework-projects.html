@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hands-on projects from graduate coursework | Bogac Canbaz</title>
+  <meta name="description" content="Five graduate course projects carried from equations to working artifacts: a flyback converter built and qualified on the bench, a permanent-magnet drive emulated with two inverters on TI DSPs, parallel-robot kinematics, machine learning notebooks and swarm optimization, and a turn-off snubber design.">
+  <meta property="og:title" content="Hands-on projects from graduate coursework | Bogac Canbaz">
+  <meta property="og:description" content="Five graduate course projects carried from equations to working artifacts: a flyback converter built and qualified on the bench, a permanent-magnet drive emulated with two inverters on TI DSPs, parallel-robot kinematics, machine learning notebooks and swarm optimization, and a turn-off snubber design.">
+  <meta property="og:image" content="assets/fig-flyback-prototype.jpg">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="wordmark" href="index.html">Bogac Canbaz</a>
+  <nav aria-label="Site">
+    <a href="index.html">About</a>
+    <a href="portfolio.html" aria-current="page">Portfolio</a>
+    <a href="assets/CV_BogacCanbaz.pdf">CV</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <nav class="crumb" aria-label="Breadcrumb"><a href="portfolio.html">Portfolio</a> <span>Course projects</span></nav>
+
+  <section class="page-head">
+    <h1>Hands-on projects from graduate coursework</h1>
+    <p class="lede">
+      Five projects from graduate courses at the University of Nebraska-Lincoln, 2021 to 2023.
+      Each one took a design from equations to something that ran: a converter on a bench, control code on a microcontroller,
+      a kinematic map, or a trained model. The courses themselves are listed <a href="index.html#coursework">here</a>.
+    </p>
+  </section>
+
+  <section class="section section--flush">
+
+    <!-- 1. Flyback converter -->
+    <article class="project" id="flyback">
+      <div class="project-text">
+        <p class="proj-eyebrow">Power Electronics, term project, team of two</p>
+        <h2 class="proj-h">A dual-output flyback converter, from the magnetics up</h2>
+        <p class="project-meta">Design, PLECS simulation, transformer fabrication, PCB assembly, and hardware qualification. 2021.</p>
+
+        <h4>The problem</h4>
+        <p>
+          A flyback converter is the smallest way to build an isolated power supply: one switch, one coupled inductor, one diode per output.
+          The specification was an 18 to 30 V input and a regulated ±15 V dual output at 0.3 A per channel, 9 W in total, switching at 100 kHz in
+          discontinuous conduction across the whole input range, with better than 80% efficiency and no forced cooling.
+          The controller, a peak-current-mode LM2587, and every semiconductor on the board were fixed by the project.
+          The coupled inductor was not. It had to be designed, wound, characterized, and made to work.
+        </p>
+
+        <h4>What I built</h4>
+        <p>
+          The design started with two operating points. For continuous and for discontinuous conduction I derived the turns ratio, magnetizing inductance,
+          and duty cycle that meet the specification at rated load, bounded by the 65 V switch rating, the 40 V output diodes, and the 30 V clamp on the primary,
+          then checked both in a Level-1 PLECS model with an ideal coupled inductor. The discontinuous design carried forward: magnetizing inductance set at the
+          minimum input voltage so the converter never crosses into continuous conduction, peak flux density held below half of saturation, and the maximum duty cycle
+          capped at 0.6 so that peak-current-mode control stays stable. A Level-2 PLECS model then added the core, the air gap, the leakage inductance,
+          and the winding resistance that the real part would have.
+        </p>
+        <p>
+          Then the part itself. A Ferroxcube E25/13/7 core in 3C94 ferrite, Litz-wire windings, and a Kapton-tape air gap, wound by hand and measured on an LCR meter
+          for magnetizing inductance, leakage inductance, and dc and ac winding resistance. Iterations went back to the bobbin until the measured values sat within
+          tolerance of the design. Only then were the transformer and the rest of the bill of materials soldered onto the PCB.
+        </p>
+
+        <h4>On the bench</h4>
+        <p>
+          Qualification meant running the converter into 50 Ω per channel and holding both outputs within ±4% of 15 V for three minutes each at 24 V, 18 V, and 30 V input,
+          while input and output power were logged to compute the efficiency. The prototype passed at all three input voltages.
+        </p>
+        <table class="metrics spec">
+          <caption>Converter specification the prototype was qualified against</caption>
+          <thead>
+            <tr><th scope="col">Property</th><th scope="col">Requirement</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Input voltage</th><td>18 to 30 V</td></tr>
+            <tr><th scope="row">Output</th><td>±15 V, within ±4%</td></tr>
+            <tr><th scope="row">Rated output</th><td>0.3 A per channel, 9 W total</td></tr>
+            <tr><th scope="row">Conduction mode at rated load</th><td>Discontinuous over the full input range</td></tr>
+            <tr><th scope="row">Switching frequency</th><td>100 kHz</td></tr>
+            <tr><th scope="row">Efficiency, natural convection</th><td>Above 80%</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Mathematical background</h4>
+        <ul class="math">
+          <li>Steady-state converter analysis by inductor volt-second and capacitor charge balance; the boundary between continuous and discontinuous conduction</li>
+          <li>Flyback transformer design: turns ratio from device voltage ratings, magnetizing inductance from the conduction-mode requirement, air gap from peak flux density</li>
+          <li>Core loss and winding loss estimation, Litz wire and skin depth at 100 kHz</li>
+          <li>Peak-current-mode control and its subharmonic instability above 50% duty cycle</li>
+        </ul>
+      </div>
+
+      <div class="project-figures">
+        <figure>
+          <img src="assets/fig-flyback-prototype.jpg" alt="The assembled flyback converter PCB with the hand-wound coupled inductor" onerror="this.parentElement.style.display='none'">
+          <figcaption>The assembled converter with the hand-wound coupled inductor on the E25/13/7 core.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-flyback-transformer.jpg" alt="The coupled inductor being measured on an LCR meter" onerror="this.parentElement.style.display='none'">
+          <figcaption>Characterizing the transformer on the LCR meter before it was allowed near the board.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-flyback-waveforms.png" alt="Simulated switch current and output voltage of the discontinuous-mode flyback converter" onerror="this.parentElement.style.display='none'">
+          <figcaption>Level-2 PLECS waveforms of the discontinuous-mode design.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 2. PM machine drive emulation platform -->
+    <article class="project" id="pm-drive">
+      <div class="project-text">
+        <p class="proj-eyebrow">Modeling and Control of Three-Phase Power Converters, term project, team of three</p>
+        <h2 class="proj-h">A permanent-magnet machine drive, emulated with two inverters and controlled on a DSP</h2>
+        <p class="project-meta">dq-frame current control, phase-locked loop design, PLECS switching and processor-in-the-loop simulation, deployment on TI C2000 hardware. 2022.</p>
+
+        <h4>The problem</h4>
+        <p>
+          Testing a motor drive on a real motor means a shaft, a load, and many ways to break something. This platform replaces the machine with a second inverter.
+          VSI-2 synthesizes the back-EMF of a permanent-magnet machine whose electrical frequency sweeps between 30 and 60 Hz every few seconds, with voltage proportional
+          to frequency as in a real machine. VSI-1 is the drive under test. Its job is to hold the dq-frame phase current at a constant 1 A on the q axis and zero on the d axis,
+          within ±0.05 A of switching-cycle-averaged variation, while the frequency, the back-EMF amplitude, and the unregulated dc bus on the far side all move.
+          The only measurements available were the three phase currents, the line-to-line back-EMF voltages, and the bus voltage.
+        </p>
+
+        <h4>What I did</h4>
+        <p>
+          My share of the design was the steady-state operating point of the drive, the phase-locked loop, and the full switching simulation.
+          From the dq averaged model of the inverter and the RL link I computed the phase-to-neutral and line-to-line duty cycles that produce the commanded current
+          at each back-EMF frequency. The phase-locked loop locks to the filtered line-to-line back-EMF so that the current controller can work in a rotating frame aligned
+          with the machine; it had to be fast enough to track the frequency sweep and keep at least 45 degrees of phase margin, with the RC sensing filters, the half-period
+          PWM delay, and the one-period computation delay all modeled in the loop. The switching model of the complete system, both inverters, both modulators
+          (third-harmonic-injection PWM for the machine emulator and minimum-loss center-aligned space-vector modulation for the drive), the phase-locked loop, the current
+          controllers, and the time-varying back-EMF, was my simulation to build and run before anything touched hardware.
+        </p>
+        <p>
+          The last steps were shared across the team. Controller code was generated from the PLECS model with PLECS Coder and checked processor-in-the-loop against the
+          simulation, the models were revised with the measured sensor gains and filter values, and the code was loaded onto two TI LAUNCHXL-F28069M boards driving a pair of
+          BOOSTXL-DRV8301 inverter stages, with dead time and overcurrent protection configured in the firmware.
+        </p>
+
+        <table class="metrics spec">
+          <caption>Operating point and control requirements</caption>
+          <thead>
+            <tr><th scope="col">Quantity</th><th scope="col">Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">dc bus</th><td>20 V</td></tr>
+            <tr><th scope="row">Interface inductance and resistance per phase</th><td>3.44 mH, 3.4 Ω</td></tr>
+            <tr><th scope="row">Emulated back-EMF</th><td>30 to 60 Hz, 3 to 6 V on the q axis</td></tr>
+            <tr><th scope="row">Current command, dq frame</th><td>0 A, 1 A</td></tr>
+            <tr><th scope="row">Allowed current variation</th><td>±0.05 A, switching-cycle averaged</td></tr>
+            <tr><th scope="row">Switching and sampling frequency</th><td>12 kHz</td></tr>
+            <tr><th scope="row">Phase margin, PLL and current loops</th><td>At least 45°</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Mathematical background</h4>
+        <ul class="math">
+          <li>Power-invariant Clarke and Park transformations, phase and line-to-line representations of three-phase variables</li>
+          <li>Switching and averaged models of the voltage source inverter in stationary and rotating frames</li>
+          <li>Small-signal loop design with sampling, PWM, and computation delays; discrete-time implementation of the compensators</li>
+          <li>Phase-locked loop as a feedback loop: bandwidth against phase margin, and the effect of the sensing filters</li>
+          <li>Carrier-based space-vector modulation and third-harmonic injection</li>
+        </ul>
+      </div>
+
+      <div class="project-figures">
+        <figure>
+          <img src="assets/fig-pmdrive-bench.jpg" alt="Two TI LAUNCHXL-F28069M boards and BOOSTXL-DRV8301 inverter stages connected through the RL link" onerror="this.parentElement.style.display='none'">
+          <figcaption>The platform: two inverter stages on two microcontroller boards, joined by the three-phase RL link.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-pmdrive-block.png" alt="Control block diagram of the drive in the dq frame with PLL, current controllers, and delay models" onerror="this.parentElement.style.display='none'">
+          <figcaption>The dq-frame control structure, with the phase-locked loop feeding the frame angle to the current controllers.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-pmdrive-idq.png" alt="Simulated dq currents of the drive as the emulated back-EMF frequency sweeps between 30 and 60 Hz" onerror="this.parentElement.style.display='none'">
+          <figcaption>dq currents through the frequency sweep in the full switching simulation.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 3. Robotics -->
+    <article class="project" id="robotics">
+      <div class="project-text">
+        <p class="proj-eyebrow">Special Topics in Robotics, coding assignments and term report</p>
+        <h2 class="proj-h">Parallel robot kinematics and the dynamics of a four-axis arm</h2>
+        <p class="project-meta">Workspace and singularity analysis in code, configuration-space search, and a report on manipulator dynamics and control. 2023.</p>
+
+        <p>
+          The course was a tour of robot architectures that are not serial arms: parallel and cable-driven mechanisms, compliant and soft actuators, origami-inspired
+          structures, and the screw-theory language that describes all of them. The assignments were code. I derived the inverse kinematics of a 3-RPR planar parallel robot
+          and swept the plane to map its reachable workspace, then found its singularity loci graphically and confirmed them by deriving the Jacobian and the conditions under
+          which it loses rank. I sketched the configuration space of a planar RP arm around a workspace obstacle and wrote a search over it, and I built a heat map of a kinematic
+          performance index across the workspace of a two-link arm. Earlier in the term I modeled McKibben pneumatic muscles from their ideal contraction and force-pressure
+          relations to size an actuator against a spring load.
+        </p>
+        <p>
+          The term report took the modeling side further: Euler-Lagrange dynamics of a four-degree-of-freedom arm, and a comparison of the control strategies the literature
+          has applied to it, from PID through differential-evolution-tuned and fuzzy-logic PID.
+        </p>
+
+        <h4>Mathematical background</h4>
+        <ul class="math">
+          <li>Forward and inverse kinematics of parallel mechanisms; workspace mapping through the inverse solution</li>
+          <li>Jacobians, singularity classification, and manipulability and condition-number indices</li>
+          <li>Configuration-space topology and obstacle representation</li>
+          <li>Screw theory: twists, wrenches, pitch, and reciprocity</li>
+          <li>Euler-Lagrange dynamics of open kinematic chains</li>
+        </ul>
+      </div>
+
+      <div class="project-figures">
+        <figure>
+          <img src="assets/fig-3rpr-workspace.png" alt="Reachable workspace of the 3-RPR planar parallel robot with its singularity loci" onerror="this.parentElement.style.display='none'">
+          <figcaption>Reachable workspace of the 3-RPR parallel robot, mapped point by point through the inverse kinematics.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-arm-heatmap.png" alt="Heat map of a kinematic performance index across the workspace of a two-link planar arm" onerror="this.parentElement.style.display='none'">
+          <figcaption>Kinematic performance of a two-link arm across its workspace.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 4. Learning systems -->
+    <article class="project" id="learning">
+      <div class="project-text">
+        <p class="proj-eyebrow">Computational Intelligence project and Introduction to Machine Learning assignments</p>
+        <h2 class="proj-h">Learning systems, from backpropagation to swarm optimization</h2>
+        <p class="project-meta">Particle swarm optimization of a wireless power link, and six machine learning notebooks trained on a GPU cluster. 2021 and 2023.</p>
+
+        <p>
+          Two courses, two years apart, covered the learning methods that later fed into my work on physics-informed observers.
+          In Computational Intelligence the emphasis was on the algorithms themselves: multilayer networks trained by backpropagation, radial basis function and echo state
+          networks, particle swarm optimization, evolutionary computation, fuzzy inference and fuzzy control, support vector machines, and reinforcement learning.
+          My project applied particle swarm optimization to a hybrid inductive and capacitive wireless power transfer link, searching the design parameters to maximize
+          link efficiency.
+        </p>
+        <p>
+          Introduction to Machine Learning was practice. Working in a small team on the university's Swan cluster, submitting Jupyter sessions as SLURM jobs and requesting
+          GPU nodes when a model needed one, we completed six notebooks: exploratory analysis and decision trees on the Iris and heart-disease data sets, naive Bayes
+          sentiment classification of IMDB reviews, a convolutional network for CIFAR-10 image classification, k-means and hierarchical clustering for image segmentation,
+          hidden Markov models for sequence data, and random forests for heart-disease prediction. The course project was a proposal built around a Kaggle competition:
+          problem definition, literature review, and a proposed learning solution.
+        </p>
+
+        <h4>Mathematical background</h4>
+        <ul class="math">
+          <li>Gradient descent and backpropagation; radial basis and recurrent reservoir networks</li>
+          <li>Bayes' rule and generative classifiers; maximum-margin classification and kernels</li>
+          <li>Bias and variance, bagging, boosting, and random forests</li>
+          <li>Expectation-maximization, and the forward-backward and Viterbi algorithms for hidden Markov models</li>
+          <li>Population-based stochastic optimization: particle swarms and evolutionary algorithms</li>
+        </ul>
+      </div>
+
+      <div class="project-figures">
+        <figure>
+          <img src="assets/fig-pso-convergence.png" alt="Convergence of the particle swarm on the wireless power transfer link efficiency" onerror="this.parentElement.style.display='none'">
+          <figcaption>Swarm convergence on the wireless power link design.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-cnn-training.png" alt="Training and validation accuracy of the convolutional network on CIFAR-10" onerror="this.parentElement.style.display='none'">
+          <figcaption>Training and validation curves of the CIFAR-10 convolutional network.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 5. Snubber -->
+    <article class="project" id="snubber">
+      <div class="project-text">
+        <p class="proj-eyebrow">Advanced Power Electronics and Applications, individual project</p>
+        <h2 class="proj-h">A turn-off snubber for the switch in a photovoltaic battery charger</h2>
+        <p class="project-meta">Snubber sizing and PLECS comparison of switching trajectories with and without the circuit. 2022.</p>
+
+        <p>
+          A buck converter stepping a 240 V, 2 A photovoltaic string down to 48 V at 10 A for battery charging puts its MOSFET through a hard turn-off every cycle,
+          with the voltage rising across the device while it is still carrying current. The project designed a polarized RC turn-off snubber to shape that trajectory:
+          the capacitor takes over the current as the switch opens and limits the rate of voltage rise, the resistor discharges the capacitor when the switch closes again,
+          and the diode makes the two paths asymmetric so the resistor stays out of the way during turn-off. I sized the snubber from the switching transition,
+          built the converter in PLECS with and without it, and compared the switching waveforms and device stresses between the two.
+        </p>
+
+        <h4>Mathematical background</h4>
+        <ul class="math">
+          <li>Switching loci of a hard-switched transistor and the safe operating area</li>
+          <li>RC snubber sizing from the turn-off current and the allowable rate of voltage rise</li>
+          <li>Snubber loss and its trade against switching loss in the device</li>
+        </ul>
+      </div>
+
+      <div class="project-figures">
+        <figure>
+          <img src="assets/fig-snubber-waveforms.png" alt="Switch voltage and current at turn-off with and without the RC snubber" onerror="this.parentElement.style.display='none'">
+          <figcaption>Turn-off voltage and current with and without the snubber.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="section next">
+    <p>These projects sit alongside the two research case studies: <a href="gyroscope.html">the underactuated gyroscope</a> and <a href="monolithic-spring.html">the monolithic spring</a>. The courses they came from are listed on the <a href="index.html#coursework">About page</a>.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>Bogac Canbaz</span>
+  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf">CV</a></span>
+</footer>
+
+</body>
+</html>
