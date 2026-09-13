@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coursework | Bogac Canbaz</title>
+  <meta name="description" content="Graduate coursework at the University of Nebraska-Lincoln in control theory, power electronics and machines, robotics, machine learning, signal processing, and systems engineering, with what each course covered.">
+  <meta property="og:title" content="Coursework | Bogac Canbaz">
+  <meta property="og:description" content="Graduate coursework at the University of Nebraska-Lincoln in control theory, power electronics and machines, robotics, machine learning, signal processing, and systems engineering, with what each course covered.">
+  <meta property="og:image" content="assets/rig.jpeg">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="wordmark" href="index.html">Bogac Canbaz</a>
+  <nav aria-label="Site">
+    <a href="index.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="coursework.html" aria-current="page">Coursework</a>
+    <a href="assets/CV_BogacCanbaz.pdf">CV</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="page-head">
+    <h1>Coursework</h1>
+    <p class="lede">
+      Graduate courses at the University of Nebraska-Lincoln, 2021 to 2024, grouped by what each one added to the toolbox.
+      Several ended in a project that ran on hardware or on a cluster; those are collected in
+      <a href="coursework-projects.html">the third portfolio case study</a>.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Control theory</h2>
+    <dl class="courses">
+      <div>
+        <dt><span class="course-code">ECEN 898</span>Advanced Linear Control</dt>
+        <dd>
+          State-space modeling and the linear algebra behind it: controllability and observability, pole placement, servo design,
+          state observers and observer-based regulators, and the linear quadratic regulator. Two individual design projects, each worked through and verified in MATLAB.
+        </dd>
+      </div>
+      <div>
+        <dt><span class="course-code">ECEN 996</span>Nonlinear Analysis and Control</dt>
+        <dd>
+          Qualitative analysis of nonlinear systems, from existence and uniqueness through limit cycles, Lyapunov's direct and indirect methods, and the invariance principle,
+          then the design side: control Lyapunov functions, backstepping, dissipativity and energy shaping, feedback interconnection, sliding mode, and adaptive control.
+          Two projects, each presented to the class. This is the mathematics my dissertation controller is built on.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section">
+    <h2>Power electronics, machines, and energy systems</h2>
+    <dl class="courses">
+      <div>
+        <dt><span class="course-code">ECEN 828</span>Power Electronics</dt>
+        <dd>
+          Steady-state analysis of dc-dc converters in continuous and discontinuous conduction, switch realization, averaged small-signal models and converter transfer functions,
+          feedback compensator design, and inductor and transformer design down to core selection and winding loss.
+          The term project <a href="coursework-projects.html#flyback">built a flyback converter from the magnetics up</a>.
+        </dd>
+      </div>
+      <div>
+        <dt><span class="course-code">ECEN 932</span>Advanced Power Electronics and Applications</dt>
+        <dd>
+          Snubber circuits, resonant converters and soft switching, pulse-width modulation, electric machine dynamics and ac motor drives, multilevel converters,
+          and the power electronics behind wind energy systems, FACTS devices, and HVDC transmission.
+          Project: <a href="coursework-projects.html#snubber">a turn-off snubber for a photovoltaic battery charger</a>.
+        </dd>
+      </div>
+      <div>
+        <dt><span class="course-code">ECEN 898</span>Modeling and Control of Three-Phase Power Converters</dt>
+        <dd>
+          Vector representations of three-phase variables, switching and averaged models of the voltage source inverter and boost rectifier in stationary and dq frames,
+          space-vector and discontinuous modulation, phase-locked loops, and digital current control with sampling and computation delays accounted for,
+          carried to hardware through PLECS processor-in-the-loop simulation and TI C2000 microcontrollers.
+          Project: <a href="coursework-projects.html#pm-drive">a permanent-magnet drive emulated with two inverters</a>.
+        </dd>
+      </div>
+      <div>
+        <dt><span class="course-code">ECEN 836</span>Electric Machines</dt>
+        <dd>
+          Transformers, ac machinery fundamentals, synchronous generators and motors, induction machines, dc machines, and single-phase motors:
+          the plants that the drives above exist to control.
+        </dd>
+      </div>
+      <div>
+        <dt><span class="course-code">ECEN 830</span>Wind Energy Systems</dt>
+        <dd>
+          Wind resource statistics and energy-yield estimation, turbine aerodynamics, generator and converter topologies, grid integration, siting, and the economics and
+          policy that decide whether a farm gets built. A term project assessed a commercial wind farm from a site's measured wind data.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section">
+    <h2>Robotics</h2>
+    <dl class="courses">
+      <div>
+        <dt><span class="course-code">MECH 892</span>Special Topics in Robotics</dt>
+        <dd>
+          Robot architectures beyond the serial arm: parallel and cable-driven mechanisms, compliant and soft actuators, origami-inspired designs, hybrid architectures,
+          singularities, configuration space, kinematic performance indices, grasp analysis, and screw theory.
+          Coding assignments on parallel robot workspaces and singularities, and <a href="coursework-projects.html#robotics">a report on the dynamics and control of a four-axis arm</a>.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section">
+    <h2>Learning and computation</h2>
+    <dl class="courses">
+      <div>
+        <dt><span class="course-code">ECEN 935</span>Computational Intelligence</dt>
+        <dd>
+          Neural networks and backpropagation, radial basis function and echo state networks, particle swarm optimization, evolutionary computation, fuzzy systems and fuzzy control,
+          support vector machines, and reinforcement learning, with a project <a href="coursework-projects.html#learning">applying swarm optimization to a wireless power transfer link</a>.
+        </dd>
+      </div>
+      <div>
+        <dt><span class="course-code">CSCE 878</span>Introduction to Machine Learning</dt>
+        <dd>
+          Decision trees, Bayesian classifiers, neural and convolutional networks, support vector machines, bagging and boosting, clustering, and hidden Markov models,
+          each implemented in Python and trained on a university GPU cluster.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section">
+    <h2>Signals and devices</h2>
+    <dl class="courses">
+      <div>
+        <dt><span class="course-code">ECEN 863</span>Digital Signal Processing</dt>
+        <dd>
+          Discrete-time systems, the discrete-time Fourier transform and the z-transform, sampling and sample-rate conversion, digital filter design, and the FFT:
+          the tools behind the encoder filtering and differentiation in my real-time controllers.
+        </dd>
+      </div>
+      <div>
+        <dt><span class="course-code">ECEN 960</span>Solid State Devices</dt>
+        <dd>
+          Carrier transport and junction physics of semiconductor devices, the layer beneath the switches and diodes in every converter above.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section">
+    <h2>Systems engineering</h2>
+    <dl class="courses">
+      <div>
+        <dt><span class="course-code">ECEN 895</span>Introduction to Systems Engineering</dt>
+        <dd>
+          Requirements definition, life-cycle models including the Vee, trade-off study frameworks, reliability, and systems-engineering heuristics,
+          studied through case histories of large programs such as the Hubble Space Telescope, GPS, and the International Space Station.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section next">
+    <p>The projects that came out of these courses are in the <a href="coursework-projects.html">portfolio</a>. Degrees, positions, and awards are on the <a href="index.html#background">About page</a>.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>Bogac Canbaz</span>
+  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf">CV</a></span>
+</footer>
+
+</body>
+</html>

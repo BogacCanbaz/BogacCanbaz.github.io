@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -21,6 +21,7 @@
   <nav aria-label="Site">
     <a href="index.html">About</a>
     <a href="portfolio.html" aria-current="page">Portfolio</a>
+    <a href="coursework.html">Coursework</a>
     <a href="assets/CV_BogacCanbaz.pdf">CV</a>
     <a href="index.html#contact">Contact</a>
   </nav>
@@ -35,16 +36,24 @@
     <p class="lede">
       Five projects from graduate courses at the University of Nebraska-Lincoln, 2021 to 2023.
       Each one took a design from equations to something that ran: a converter on a bench, control code on a microcontroller,
-      a kinematic map, or a trained model. The courses themselves are listed <a href="index.html#coursework">here</a>.
+      a kinematic map, or a trained model. The courses themselves are listed on the <a href="coursework.html">Coursework page</a>.
     </p>
+    <ol class="contents" aria-label="Projects on this page">
+      <li><a href="#flyback">A dual-output flyback converter, from the magnetics up</a><span>ECEN 828 Power Electronics</span></li>
+      <li><a href="#pm-drive">A permanent-magnet machine drive, emulated with two inverters and controlled on a DSP</a><span>ECEN 898 Three-Phase Power Converters</span></li>
+      <li><a href="#robotics">Parallel robot kinematics and the dynamics of a four-axis arm</a><span>MECH 892 Special Topics in Robotics</span></li>
+      <li><a href="#learning">Learning systems, from backpropagation to swarm optimization</a><span>ECEN 935 and CSCE 878</span></li>
+      <li><a href="#snubber">A turn-off snubber for the switch in a photovoltaic battery charger</a><span>ECEN 932 Advanced Power Electronics</span></li>
+    </ol>
   </section>
 
   <section class="section section--flush">
 
     <!-- 1. Flyback converter -->
-    <article class="project" id="flyback">
+    <article class="project project--numbered" id="flyback">
       <div class="project-text">
-        <p class="proj-eyebrow">Power Electronics, term project, team of two</p>
+        <p class="proj-index" aria-hidden="true">1</p>
+        <p class="proj-eyebrow"><strong>Project 1 of 5.</strong> ECEN 828 Power Electronics, Prof. Jun Wang. Term project, team of two.</p>
         <h2 class="proj-h">A dual-output flyback converter, from the magnetics up</h2>
         <p class="project-meta">Design, PLECS simulation, transformer fabrication, PCB assembly, and hardware qualification. 2021.</p>
 
@@ -118,9 +127,10 @@
     </article>
 
     <!-- 2. PM machine drive emulation platform -->
-    <article class="project" id="pm-drive">
+    <article class="project project--numbered" id="pm-drive">
       <div class="project-text">
-        <p class="proj-eyebrow">Modeling and Control of Three-Phase Power Converters, term project, team of three</p>
+        <p class="proj-index" aria-hidden="true">2</p>
+        <p class="proj-eyebrow"><strong>Project 2 of 5.</strong> ECEN 898 Modeling and Control of Three-Phase Power Converters, Prof. Jun Wang. Term project, team of three.</p>
         <h2 class="proj-h">A permanent-magnet machine drive, emulated with two inverters and controlled on a DSP</h2>
         <p class="project-meta">dq-frame current control, phase-locked loop design, PLECS switching and processor-in-the-loop simulation, deployment on TI C2000 hardware. 2022.</p>
 
@@ -192,9 +202,10 @@
     </article>
 
     <!-- 3. Robotics -->
-    <article class="project" id="robotics">
+    <article class="project project--numbered" id="robotics">
       <div class="project-text">
-        <p class="proj-eyebrow">Special Topics in Robotics, coding assignments and term report</p>
+        <p class="proj-index" aria-hidden="true">3</p>
+        <p class="proj-eyebrow"><strong>Project 3 of 5.</strong> MECH 892 Special Topics in Robotics, Prof. Carl Nelson. Coding assignments and term report, individual.</p>
         <h2 class="proj-h">Parallel robot kinematics and the dynamics of a four-axis arm</h2>
         <p class="project-meta">Workspace and singularity analysis in code, configuration-space search, and a report on manipulator dynamics and control. 2023.</p>
 
@@ -234,9 +245,10 @@
     </article>
 
     <!-- 4. Learning systems -->
-    <article class="project" id="learning">
+    <article class="project project--numbered" id="learning">
       <div class="project-text">
-        <p class="proj-eyebrow">Computational Intelligence project and Introduction to Machine Learning assignments</p>
+        <p class="proj-index" aria-hidden="true">4</p>
+        <p class="proj-eyebrow"><strong>Project 4 of 5.</strong> ECEN 935 Computational Intelligence, Prof. Wei Qiao, individual project; and CSCE 878 Introduction to Machine Learning, Prof. Stephen Scott, team assignments.</p>
         <h2 class="proj-h">Learning systems, from backpropagation to swarm optimization</h2>
         <p class="project-meta">Particle swarm optimization of a wireless power link, and six machine learning notebooks trained on a GPU cluster. 2021 and 2023.</p>
 
@@ -278,9 +290,10 @@
     </article>
 
     <!-- 5. Snubber -->
-    <article class="project" id="snubber">
+    <article class="project project--numbered" id="snubber">
       <div class="project-text">
-        <p class="proj-eyebrow">Advanced Power Electronics and Applications, individual project</p>
+        <p class="proj-index" aria-hidden="true">5</p>
+        <p class="proj-eyebrow"><strong>Project 5 of 5.</strong> ECEN 932 Advanced Power Electronics and Applications, Prof. Wei Qiao. Individual project.</p>
         <h2 class="proj-h">A turn-off snubber for the switch in a photovoltaic battery charger</h2>
         <p class="project-meta">Snubber sizing and PLECS comparison of switching trajectories with and without the circuit. 2022.</p>
 
@@ -311,7 +324,7 @@
   </section>
 
   <section class="section next">
-    <p>These projects sit alongside the two research case studies: <a href="gyroscope.html">the underactuated gyroscope</a> and <a href="monolithic-spring.html">the monolithic spring</a>. The courses they came from are listed on the <a href="index.html#coursework">About page</a>.</p>
+    <p>These projects sit alongside the two research case studies: <a href="gyroscope.html">the underactuated gyroscope</a> and <a href="monolithic-spring.html">the monolithic spring</a>. The courses they came from are listed on the <a href="coursework.html">Coursework page</a>.</p>
   </section>
 
 </main>

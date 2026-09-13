@@ -1,9 +1,10 @@
 # bogaccanbaz.github.io
 
-Six pages, plain HTML and CSS, no build step.
+Seven pages, plain HTML and CSS, no build step.
 
-- index.html                about, coursework, publications, patents, contact
+- index.html                about, background, publications, patents, contact
 - portfolio.html            hub linking to the three case studies
+- coursework.html           graduate courses with course numbers, grouped by theme
 - gyroscope.html            case study one: underactuated gyroscope
 - monolithic-spring.html    case study two: monolithic spring
 - coursework-projects.html  case study three: hands-on projects from graduate courses

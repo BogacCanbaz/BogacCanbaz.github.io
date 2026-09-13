@@ -617,3 +617,73 @@ main { max-width: 1120px; }
   margin: 0 0 8px;
 }
 .project[id] { scroll-margin-top: 96px; }
+
+/* ================================================================
+   Coursework page and numbered course projects
+   ================================================================ */
+
+/* Course code sits above the course name */
+.course-code {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 2px;
+}
+
+/* Note under the Education list on the About page */
+.cv-note { margin: 12px 0 0; color: var(--ink-soft); font-size: 15px; }
+
+/* Contents list at the top of the projects page */
+.contents {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: proj;
+  max-width: 78ch;
+  border-top: 1px solid var(--rule);
+}
+.contents li {
+  counter-increment: proj;
+  display: grid;
+  grid-template-columns: 2.2em minmax(0, 1fr) auto;
+  gap: 0 16px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.contents li::before {
+  content: counter(proj);
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.contents li a { border-bottom-color: transparent; }
+.contents li a:hover { border-bottom-color: currentColor; }
+.contents li span { font-size: 14px; color: var(--ink-soft); white-space: nowrap; }
+
+/* Each numbered project opens with a large index and a heavier rule */
+.project--numbered {
+  border-top: 2px solid var(--ink);
+  border-bottom: 0;
+  padding-top: 36px;
+  margin-bottom: 40px;
+}
+.project--numbered:last-of-type { margin-bottom: 0; }
+.proj-index {
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--accent);
+  margin: 0 0 14px;
+  font-variant-numeric: tabular-nums;
+}
+.project--numbered .proj-eyebrow { margin-bottom: 10px; }
+.project--numbered .proj-eyebrow strong { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 560px) {
+  .contents li { grid-template-columns: 2.2em minmax(0, 1fr); }
+  .contents li span { grid-column: 2; white-space: normal; }
+}
