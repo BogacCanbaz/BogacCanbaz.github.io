@@ -692,6 +692,55 @@ main { max-width: 1120px; }
    Octagonal portrait
    ================================================================ */
 
+/* ================================================================
+   Skills under each portfolio card: three short rows, a small
+   uppercase label on the left (Methods, Tools, Hardware) and the
+   skills as square-cornered tags on the right
+   ================================================================ */
+
+.card-skills {
+  margin: 18px 0 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+.card-skills > div {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  column-gap: 14px;
+  align-items: start;
+  padding: 4px 0;
+}
+.card-skills dt {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-top: 5px;
+}
+.card-skills dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  text-align: left;
+  hyphens: manual;
+}
+.card-skills dd span {
+  font-size: 13px;
+  line-height: 1.35;
+  padding: 3px 9px;
+  border: 1px solid var(--rule);
+  background: var(--paper-soft);
+  color: var(--ink);
+}
+.project-card:hover .card-skills dd span { border-color: var(--ink-soft); }
+
+@media (max-width: 560px) {
+  .card-skills > div { grid-template-columns: 1fr; row-gap: 4px; }
+  .card-skills dt { padding-top: 0; }
+}
+
 /* Oval portrait, three wide by four tall. For a circle, set aspect-ratio to 1 / 1. */
 .intro .portrait img {
   height: auto;
