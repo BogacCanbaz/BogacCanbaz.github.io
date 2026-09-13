@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
   <script src="theme.js?v=2"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d59737863fb84b89897fe72d9e2c8856"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
@@ -48,10 +48,66 @@
         <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a>
         <a href="assets/CV_BogacCanbaz.pdf" target="_blank" rel="noopener">CV (PDF)</a>
       </p>
+      <nav class="page-nav" aria-label="On this page">
+        <span class="page-nav-label">On this page</span>
+        <a href="#background">Background</a>
+        <a href="#what-i-do">What I do</a>
+        <a href="#work">What I work on</a>
+        <a href="#applications">Where it applies</a>
+        <a href="#publications">Publications</a>
+        <a href="#patents">Patents</a>
+        <a href="#contact">Contact</a>
+        <span class="page-nav-label">Elsewhere</span>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="coursework.html">Coursework</a>
+      </nav>
     </div>
   </section>
 
-  <section class="section">
+  <section id="background" class="section section--background">
+    <h2>Background</h2>
+
+    <h3>Education</h3>
+    <ul class="cv-list">
+      <li><strong>PhD, Electrical Engineering.</strong> University of Nebraska-Lincoln. Expected December 2026. GPA 3.87/4.00</li>
+      <li><strong>MS, Electrical Engineering.</strong> University of Nebraska-Lincoln. May 2024. GPA 4.00/4.00</li>
+      <li><strong>BS, Electrical and Electronic Engineering.</strong> Bogazici University, Istanbul, Turkiye. July 2021</li>
+    </ul>
+    <p class="cv-note">The graduate courses behind these degrees are listed on the <a href="coursework.html">Coursework page</a>.</p>
+
+    <h3>Experience</h3>
+    <dl class="capabilities">
+
+      <div>
+        <dt>Ph.D. Graduate Research Assistant, Optimal Control, Estimation, and Real-Time Autonomy</dt>
+        <dd class="project-meta">Department of Electrical and Computer Engineering, University of Nebraska-Lincoln. September 2022 to present.</dd>
+        <dd>Real-time nonlinear control and state estimation for an underactuated gyroscope, validated on hardware.</dd>
+      </div>
+
+      <div>
+        <dt>M.S. Graduate Research Assistant, Multiphysics Modeling and Numerical Optimization</dt>
+        <dd class="project-meta">Department of Electrical and Computer Engineering, University of Nebraska-Lincoln. August 2022 to May 2024.</dd>
+        <dd>Electro-thermal finite element modeling and design optimization of high-frequency press-pack SiC power modules.</dd>
+      </div>
+
+      <div>
+        <dt>Graduate Teaching Assistant, Embedded Systems and Technical Mentoring</dt>
+        <dd class="project-meta">Department of Electrical and Computer Engineering, University of Nebraska-Lincoln. August 2021 to August 2022.</dd>
+        <dd>Guided students through embedded design projects with hardware interfaces and real-time constraints.</dd>
+      </div>
+
+    </dl>
+
+    <h3>Awards</h3>
+    <ul class="cv-list">
+      <li><strong>Graduate Scholarship</strong>, University of Nebraska-Lincoln, 2022 to 2026</li>
+      <li><strong>College of Engineering Professional Development Fellowship</strong>, University of Nebraska-Lincoln, 2024</li>
+      <li><strong>Holling Fellowship</strong>, University of Nebraska-Lincoln, 2021 to 2022</li>
+      <li><strong>TUBITAK 2209-A Undergraduate Research Grant</strong>, 2021</li>
+    </ul>
+  </section>
+
+  <section id="what-i-do" class="section">
     <h2>What I do</h2>
     <div class="prose">
       <p>
@@ -84,7 +140,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section id="work" class="section">
     <h2>What I work on</h2>
     <dl class="capabilities">
 
@@ -132,7 +188,7 @@
     </dl>
   </section>
 
-  <section class="section">
+  <section id="applications" class="section">
     <h2>Where it applies</h2>
     <p class="lede">
       The mathematics of underactuated, strongly coupled multibody control is not specific to one industry. The same structure appears wherever a machine has to move precisely
@@ -149,48 +205,6 @@
     <p class="next-inline">The two bodies of research behind all of this, and the hands-on course projects alongside them, are in the <a href="portfolio.html">portfolio</a>.</p>
   </section>
 
-  <section id="background" class="section section--background">
-    <h2>Background</h2>
-
-    <h3>Education</h3>
-    <ul class="cv-list">
-      <li><strong>PhD, Electrical Engineering.</strong> University of Nebraska-Lincoln. Expected December 2026. GPA 3.87/4.00</li>
-      <li><strong>MS, Electrical Engineering.</strong> University of Nebraska-Lincoln. May 2024. GPA 4.00/4.00</li>
-      <li><strong>BS, Electrical and Electronic Engineering.</strong> Bogazici University, Istanbul, Turkiye. July 2021</li>
-    </ul>
-    <p class="cv-note">The graduate courses behind these degrees are listed on the <a href="coursework.html">Coursework page</a>.</p>
-
-    <h3>Experience</h3>
-    <dl class="capabilities">
-
-      <div>
-        <dt>Ph.D. Graduate Research Assistant, Optimal Control, Estimation, and Real-Time Autonomy</dt>
-        <dd class="project-meta">Department of Electrical and Computer Engineering, University of Nebraska-Lincoln. September 2022 to present.</dd>
-        <dd>Real-time nonlinear control and state estimation for an underactuated gyroscope, validated on hardware.</dd>
-      </div>
-
-      <div>
-        <dt>M.S. Graduate Research Assistant, Multiphysics Modeling and Numerical Optimization</dt>
-        <dd class="project-meta">Department of Electrical and Computer Engineering, University of Nebraska-Lincoln. August 2022 to May 2024.</dd>
-        <dd>Electro-thermal finite element modeling and design optimization of high-frequency press-pack SiC power modules.</dd>
-      </div>
-
-      <div>
-        <dt>Graduate Teaching Assistant, Embedded Systems and Technical Mentoring</dt>
-        <dd class="project-meta">Department of Electrical and Computer Engineering, University of Nebraska-Lincoln. August 2021 to August 2022.</dd>
-        <dd>Guided students through embedded design projects with hardware interfaces and real-time constraints.</dd>
-      </div>
-
-    </dl>
-
-    <h3>Awards</h3>
-    <ul class="cv-list">
-      <li><strong>Graduate Scholarship</strong>, University of Nebraska-Lincoln, 2022 to 2026</li>
-      <li><strong>College of Engineering Professional Development Fellowship</strong>, University of Nebraska-Lincoln, 2024</li>
-      <li><strong>Holling Fellowship</strong>, University of Nebraska-Lincoln, 2021 to 2022</li>
-      <li><strong>TUBITAK 2209-A Undergraduate Research Grant</strong>, 2021</li>
-    </ul>
-  </section>
 
 
   <section id="publications" class="section">
@@ -202,6 +216,7 @@
       <li>B. Canbaz, E. Muravleva, J. Wang, L. Qu, and J. Hudgins, "Design and optimization of a novel monolithic spring for high-frequency press-pack SiC FET modules," in <em>Proc. IEEE Energy Conversion Congress and Exposition (ECCE)</em>, Nashville, TN, 2023, pp. 5551 to 5557.</li>
       <li>E. Muravleva, B. Canbaz, J. Wang, L. Qu, and J. Hudgins, "Switch cell design for novel high-frequency press-pack SiC FET modules," in <em>Proc. IEEE Energy Conversion Congress and Exposition (ECCE)</em>, Nashville, TN, 2023, pp. 5455 to 5461.</li>
       <li>B. Canbaz, L. Qu, and W. Qiao, "Finite-time adaptive sliding-mode-based control for underactuated double-gimbal control moment gyroscopes," submitted to <em>IEEE Transactions on Industrial Electronics</em>, under review.</li>
+      <li>B. Canbaz, "Design and optimization of a novel monolithic spring for high-frequency press-pack SiC FET modules," M.S. thesis, University of Nebraska-Lincoln, May 2024, <a href="https://digitalcommons.unl.edu/elecengtheses/152" target="_blank" rel="noopener">open access</a>.</li>
     </ol>
   </section>
 

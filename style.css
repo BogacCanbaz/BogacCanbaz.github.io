@@ -741,6 +741,42 @@ main { max-width: 1120px; }
   .card-skills dt { padding-top: 0; }
 }
 
+/* On-page navigation under the intro on the About page: a labeled row of
+   jump links, drawn like the skill tags, so a first-time visitor can see
+   what the page holds without scrolling */
+
+.page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+.page-nav-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-right: 4px;
+}
+.page-nav-label + .page-nav-label,
+.page-nav a + .page-nav-label { margin-left: 10px; }
+.page-nav a {
+  font-size: 14px;
+  line-height: 1.35;
+  padding: 5px 11px;
+  border: 1px solid var(--rule);
+  background: var(--paper-soft);
+  color: var(--ink);
+}
+.page-nav a:hover { border-color: var(--ink-soft); color: var(--ink); }
+
+/* Anchored sections stop clear of the sticky header */
+.section[id] { scroll-margin-top: 90px; }
+
 /* Oval portrait, three wide by four tall. For a circle, set aspect-ratio to 1 / 1. */
 .intro .portrait img {
   height: auto;

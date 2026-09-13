@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
   <script src="theme.js?v=2"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d59737863fb84b89897fe72d9e2c8856"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
@@ -35,7 +35,7 @@
     <h1>Portfolio</h1>
     <p class="lede">
       Two bodies of research, each carried from first-principles modeling through analysis and simulation to measured results on physical hardware,
-      and the hands-on course projects that built the toolkit behind them.
+      and the hands-on projects, from graduate coursework and from an undergraduate build, that put the toolkit together.
     </p>
   </section>
 
@@ -86,7 +86,7 @@
               <span><strong>2</strong> published patent applications</span>
             </p>
             <dl class="card-skills">
-              <div><dt>Methods</dt><dd><span>Multiphysics finite element analysis</span><span>Design-space optimization</span><span>Stress and deflection limits</span><span>Parasitic resistance and inductance</span></dd></div>
+              <div><dt>Methods</dt><dd><span>Multiphysics finite element analysis</span><span>Particle swarm optimization</span><span>Design-space scanning</span><span>Stress and deflection limits</span><span>Thermal and parasitic modeling</span></dd></div>
               <div><dt>Tools</dt><dd><span>COMSOL</span><span>LiveLink for MATLAB</span></dd></div>
               <div><dt>Hardware</dt><dd><span>Laser-cut beryllium-copper prototypes</span><span>Instron mechanical testing</span><span>RLC meter measurements</span></dd></div>
             </dl>
@@ -118,6 +118,35 @@
               <div><dt>Hardware</dt><dd><span>Transformer winding</span><span>PCB assembly</span><span>Two-inverter test bench</span><span>Oscilloscope and LCR measurements</span></dd></div>
             </dl>
             <span class="card-cue">Read the case studies</span>
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a class="project-card" href="antenna.html">
+          <figure><img src="assets/fig-antenna-collage.webp" alt="" onerror="this.parentElement.classList.add('nofig')"></figure>
+          <div>
+            <h2>A portable antenna measurement system</h2>
+            <p class="project-meta">Undergraduate project, Bogazici University. Stepper motor control, RF switching, and VNA automation.</p>
+            <p>
+              Commercial multi-probe antenna measurement systems cost around $100K. We built a portable one for about $1400: the antenna under test turns on a
+              stepper-driven table, RF switch boards route the probe signals to a PicoVNA, and MATLAB runs the whole measurement. My part was the motion and the
+              measurement chain. I wrote the stepper control on an Arduino UNO with the Motor Shield Rev3, step-and-hold positioning with speed and direction control,
+              brought the SP8T and SP4T RF switch boards into the same sequence, and built the MATLAB side of the PicoVNA link: connecting and calibrating the
+              instrument, triggering block captures of S21, and synchronizing every capture with the table position through a GUI. A full two-dimensional
+              radiation pattern took under a minute.
+            </p>
+            <p class="stat-row">
+              <span><strong>Under 1 min</strong> for a full 2D pattern</span>
+              <span><strong>About 70×</strong> cheaper than multi-probe systems</span>
+              <span><strong>$1400</strong> of hardware</span>
+            </p>
+            <dl class="card-skills">
+              <div><dt>Methods</dt><dd><span>Stepper motor control</span><span>RF switch sequencing</span><span>Instrument automation</span><span>Far-field pattern measurement</span></dd></div>
+              <div><dt>Tools</dt><dd><span>Arduino</span><span>MATLAB</span><span>PicoVNA</span></dd></div>
+              <div><dt>Hardware</dt><dd><span>Arduino UNO and Motor Shield Rev3</span><span>HMC253 SP8T switch board</span><span>SP4T switch board</span><span>Rotating antenna table</span></dd></div>
+            </dl>
+            <span class="card-cue">Read the case study</span>
           </div>
         </a>
       </li>

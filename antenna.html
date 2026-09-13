@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A portable antenna measurement system | Bogac Canbaz</title>
+  <meta name="description" content="An undergraduate project at Bogazici University: automating far-field radiation pattern measurement with a stepper-driven turntable, RF switch boards, and a PicoVNA driven from MATLAB, for about $1400 of hardware.">
+  <meta property="og:title" content="A portable antenna measurement system | Bogac Canbaz">
+  <meta property="og:description" content="An undergraduate project at Bogazici University: automating far-field radiation pattern measurement with a stepper-driven turntable, RF switch boards, and a PicoVNA driven from MATLAB, for about $1400 of hardware.">
+  <meta property="og:image" content="assets/fig-antenna-arduino.jpg">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=11">
+  <script src="theme.js?v=2"></script>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d59737863fb84b89897fe72d9e2c8856"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<header class="site-header">
+  <a class="wordmark" href="index.html">Bogac Canbaz</a>
+  <nav aria-label="Site">
+    <a href="index.html">About</a>
+    <a href="portfolio.html" aria-current="page">Portfolio</a>
+    <a href="coursework.html">Coursework</a>
+    <a href="assets/CV_BogacCanbaz.pdf" target="_blank" rel="noopener">CV</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <nav class="crumb" aria-label="Breadcrumb"><a href="portfolio.html">Portfolio</a> <span>Antenna measurement system</span></nav>
+
+  <section class="page-head">
+    <h1>A portable antenna measurement system</h1>
+    <p class="lede">Undergraduate project, Bogazici University. A far-field radiation pattern in under a minute, for about $1400 of hardware instead of a $100K multi-probe range.</p>
+  </section>
+
+  <section class="section section--flush">
+<article class="project">
+      <div class="project-text">
+        <h2 class="proj-h">Automating the measurement of an antenna's radiation pattern</h2>
+        <p class="project-meta">Stepper motor control on an Arduino, RF switch sequencing, and a MATLAB interface to a PicoVNA. Team project.</p>
+
+        <h4>What a radiation pattern is</h4>
+        <p>
+          An antenna does not radiate equally in every direction. Its radiation pattern is the map of how much power it sends, or receives, as a function of angle: a main
+          lobe in the direction it is meant to serve, side lobes that leak power elsewhere, nulls between them, and a beamwidth that says how tightly the main lobe is focused.
+          Every antenna is designed around that map, and every design has to be measured, because manufacturing tolerances, the enclosure, the cable, and the ground plane all
+          change the pattern the simulation promised. The measurement has to be made in the far field, far enough away that the wave front arriving at the probe is flat; the
+          rule of thumb is a distance of 2D<sup>2</sup>/λ for an antenna of size D at wavelength λ, a few wavelengths for a small antenna and many meters for a large array.
+          In practice that means an anechoic chamber lined with absorber, a probe antenna, and a way to sweep the angle between the probe and the antenna under test while a
+          vector network analyzer records the transmission between them. The magnitude of that transmission, S<sub>21</sub>, plotted against angle is the pattern.
+        </p>
+
+        <h4>Why a cheaper system</h4>
+        <p>
+          Commercial multi-probe systems surround the antenna under test with an arc of probes and switch electronically between them, so a full pattern takes seconds. They
+          cost on the order of $100K, with a chamber to go with them. A university lab, a small company, or a student team testing a 5G patch antenna or a drone's telemetry
+          link needs the same measurement with far less money and bench space. Our target was a rig that one person could set up, that measured a complete two-dimensional
+          pattern in under a minute, and that cost about $1400 in hardware, roughly 70 times less than the commercial systems it stands in for.
+        </p>
+
+        <h4>How the system works</h4>
+        <p>
+          The antenna under test sits on a turntable driven by a stepper motor, so that its angle is known exactly at every step. Probe antennas are connected through RF
+          switch boards, an eight-way HMC253 SP8T and a four-way SP4T, so that a single PicoVNA port can be routed to whichever probe the measurement needs. MATLAB runs the
+          whole sequence from a GUI: send the table to the next angle and hold it, select the probe, trigger the VNA to capture a block of S<sub>21</sub> samples, tag the block
+          with the table position, and move on. When the table has completed a revolution the stored blocks are the pattern, and a polar plot of them is the result.
+        </p>
+
+        <h4>My part</h4>
+        <p>
+          I owned the motion and the measurement chain. The stepper control ran on an Arduino UNO with the Motor Shield Rev3: step-and-hold positioning so that the table
+          stops exactly on each measurement angle, speed control for the moves between them, and direction control for clockwise and counterclockwise sweeps, all on an
+          8-bit microcontroller with a few kilobytes of memory. I brought the RF switch boards into the same sequence, and I wrote the MATLAB side of the PicoVNA link:
+          connecting to the instrument, running its calibration, triggering the S<sub>21</sub> block captures, and synchronizing every capture with the table position through
+          the GUI. The result was a full two-dimensional radiation pattern in under one minute.
+        </p>
+
+        <h4>Mathematical background</h4>
+        <ul class="math">
+          <li>Far-field condition, 2D<sup>2</sup>/λ, and why the pattern is measured at a distance</li>
+          <li>Radiation pattern, directivity, half-power beamwidth, and side-lobe level</li>
+          <li>Scattering parameters: S<sub>21</sub> as a transmission measurement, and calibrating out the cables and the probe</li>
+          <li>Angular sampling of a pattern from the stepper's step angle and the beamwidth to be resolved</li>
+        </ul>
+      </div>
+
+      <div class="project-figures">
+        <figure>
+          <img src="assets/fig-antenna-arduino.jpg" alt="An Arduino UNO with an Adafruit Motor Shield stacked on top, wired to a stepper motor and a USB cable" onerror="this.parentElement.style.display='none'">
+          <figcaption>The Arduino UNO and the Motor Shield Rev3 that drive the turntable's stepper motor.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-antenna-switches.jpg" alt="Two green RF switch boards with SMA connectors: an eight-port HMC253 SP8T board on the left and a four-port SP4T board on the right" onerror="this.parentElement.style.display='none'">
+          <figcaption>The RF switch boards: an eight-way HMC253 SP8T (left) and a four-way SP4T (right), each routing one probe at a time toward the VNA.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-antenna-system.png" alt="Block diagram with a measurement chain, PC to PicoVNA to RF switch boards to probe antennas, and a motion chain, PC to Arduino to the antenna under test on a rotating table" onerror="this.parentElement.style.display='none'">
+          <figcaption>The two chains of the system. The PC drives the VNA and the switches for the measurement, and the Arduino for the motion, and ties each capture to a table angle.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-antenna-pattern.png" alt="Polar plot of a radiation pattern with a main lobe at the top, several side lobes, and nulls between them, in decibels" onerror="this.parentElement.style.display='none'">
+          <figcaption>What the measurement produces. This example pattern, a six-element array computed for illustration, shows the main lobe, the side lobes, and the nulls a sweep has to resolve.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-antenna-multiprobe.jpg" alt="Drawing of a multi-probe antenna measurement system: an antenna under test on a mast inside a ring of probe antennas, with arrows showing the rotation" onerror="this.parentElement.style.display='none'">
+          <figcaption>A commercial-style multi-probe range: the antenna under test rotates in one axis while an arc of probes samples the other. Figure from S.-H. Park et al., <em>Electronics</em> 11, 3435 (2022), CC BY 4.0.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-antenna-chamber.jpg" alt="A spacesuit test article standing in an anechoic chamber whose walls and floor are covered with blue foam absorber pyramids, with an engineer beside it" onerror="this.parentElement.style.display='none'">
+          <figcaption>Where patterns are usually measured: an anechoic chamber at NASA's Johnson Space Center, its walls lined with absorber, during antenna tests on a spacesuit. NASA photograph.</figcaption>
+        </figure>
+      </div>
+    </article>
+  </section>
+
+  <section class="section next">
+    <p>The other case studies: <a href="gyroscope.html">the underactuated gyroscope</a>, <a href="monolithic-spring.html">the monolithic spring</a>, and <a href="coursework-projects.html">hands-on projects from graduate coursework</a>.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>Bogac Canbaz</span>
+  <span><a href="https://www.linkedin.com/in/bogac-canbaz/">LinkedIn</a> <a href="https://scholar.google.com/citations?hl=en&amp;user=BVSwISgAAAAJ">Google Scholar</a> <a href="assets/CV_BogacCanbaz.pdf" target="_blank" rel="noopener">CV</a></span>
+</footer>
+
+</body>
+</html>

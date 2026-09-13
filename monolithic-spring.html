@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
   <script src="theme.js?v=2"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d59737863fb84b89897fe72d9e2c8856"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
@@ -35,27 +35,82 @@
 
   <section class="page-head">
     <h1>A monolithic spring for high-frequency press-pack SiC power modules</h1>
-    <p class="lede">MS research, 2022 to 2024. With Jun Wang, Ekaterina Muravleva, Liyan Qu, and Jerry Hudgins.</p>
   </section>
 
   <section class="section section--flush">
 <article class="project">
       <div class="project-text">
-        
+        <h2 class="proj-h">A monolithic spring for high-frequency press-pack SiC power modules</h2>
+        <p class="project-meta">MS thesis, May 2024. Modeling, optimization, fabrication, and test.</p>
+
+        <h4>The problem</h4>
         <p>
-          Press-pack power modules clamp semiconductor dies between electrodes with springs. The stacked stainless-steel disc springs used in IGBT modules add resistance, inductance, and thermal resistance that SiC devices switching ten times faster cannot tolerate,
-          and SiC dies are too small to press-contact at all. I designed a single beryllium-copper block with interleaved laser-cut slits that acts as the spring, the conductor, and the heat path at once, with four sintered legs bonded directly to the dies.
+          Press-pack modules clamp their semiconductor dies between electrodes with springs instead of solder, so the module can be cooled from both faces and a failed device
+          fails short, which series-connected converters need. The benchmark design, Hitachi's StakPak IGBT module, presses each chip with a stack of stainless-steel disc springs,
+          and that stack is the weak point once the switch is a SiC FET. A single steel disc deflects very little, so many are stacked and the module grows tall and heavy. Steel
+          conducts poorly, so copper current paths are patched in around the stack, adding two dry-contact surfaces to every current path. Heat crossing the stack sees only about
+          14% of the conductivity of the baseplate because of the air between the discs. And the stack's 150 to 300 nH of stray inductance is tolerable at the 1 kHz switching of an
+          IGBT but not for a SiC FET switching ten times faster. SiC dies are also a half to a fifth the size of IGBT chips, too small to press-contact reliably at all.
+        </p>
+
+        <h4>The design</h4>
+        <p>
+          I replaced the whole stack with one block of beryllium-copper, an alloy that yields at about 1200 MPa against roughly 200 MPa for stainless steel and, being more than
+          97% copper, conducts heat and current almost like pure copper. Seven layers of laser-cut slits, each layer rotated 45 degrees from the one below so that the slits open on
+          the corners, turn the block into a spring with a chosen stiffness. A through-hole down the center adds deflection and removes mass without adding resistance or
+          inductance. Four silver-coated legs on the bottom are sintered straight onto the SiC source pads, so the spring is also the conductor and the heat path, and a polished
+          top with a tapped hole bolts to the lid. Bonding the spring to the dies also evens out their junction temperatures and adds thermal capacitance that smooths the
+          temperature swing under a short-circuit fault.
+        </p>
+
+        <h4>Optimizing the slits</h4>
+        <p>
+          With the footprint, the layer count, the through-hole, and the 650 N clamping force fixed by the module, three dimensions were left to choose: the slit width w, the
+          slit height h<sub>1</sub>, and the gap h<sub>2</sub> between slit layers. Every candidate had to keep the peak body stress below 1000 MPa, a margin under the yield strength
+          to absorb manufacturing imperfections, and deflect more than 0.7 mm so that tolerances would not change the clamping force. Within that, the goal was the shortest spring
+          with the lowest AC resistance and stray inductance. I drove COMSOL Multiphysics from MATLAB through LiveLink, first sweeping the design space in 0.05 mm steps, w from
+          5.3 to 9.1 mm, h<sub>1</sub> from 1 to 2 mm, and h<sub>2</sub> from 0.5 to 1 mm, to map how stress and deflection move with each dimension, then searching it with
+          particle swarm optimization, where each particle's fitness is one finite element solve of a cost that combines the spring-constant error, the AC resistance, the stray
+          inductance, and a penalty for exceeding the stress limit. The chosen point, w = 8.7 mm, h<sub>1</sub> = 1 mm, h<sub>2</sub> = 0.5 mm, gives a 16 mm tall spring that deflects
+          0.733 mm at 650 N with a peak stress of 874.7 MPa, concentrated at the slit ends, and presses the dies at a uniform 7.7 MPa.
         </p>
         <p>
-          The design was optimized by scanning the slit geometry in COMSOL through LiveLink for MATLAB against a 1000 MPa body-stress limit at 650 N clamping force.
-          The chosen point gives 0.773 mm deflection, 874.7 MPa peak stress, 148 µΩ DC resistance against 856 µΩ for the disc-spring assembly it replaces, and 2.8 nH stray inductance.
-          Fabricated parts tested on an Instron frame stayed in the elastic region and recovered their shape, and measured resistance and inductance agreed with simulation.
-          This work is the basis of two U.S. patent applications on which I am a co-inventor.
+          To measure the gain, I modeled the disc-spring module it replaces to the same targets, with CDM 168204 discs, an insulator to keep current out of the stack, and copper
+          current paths around it, and ran both through the same electrical and thermal simulations, the thermal case with a constant heat load on each die and both faces of the
+          module held at 70 °C as the cooling boundary. The monolithic spring's dies peak at 98.9 °C against 145 °C for the disc-spring module, 46.1 °C cooler, because heat leaves
+          through a solid copper body whose slits add surface area instead of through the edges of steel discs.
         </p>
+        <table class="metrics">
+          <caption>The optimized spring against the disc-spring module it replaces, simulated at the same 650 N clamping force</caption>
+          <thead>
+            <tr><th scope="col">Quantity</th><th scope="col">Monolithic spring</th><th scope="col">Disc-spring module</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">DC resistance</th><td>148 µΩ</td><td>856.1 µΩ</td></tr>
+            <tr><th scope="row">AC resistance at 20 kHz</th><td>224.5 µΩ</td><td>987.1 µΩ</td></tr>
+            <tr><th scope="row">Stray inductance</th><td>2.8 nH</td><td>higher, through the insulated stack</td></tr>
+            <tr><th scope="row">Peak die temperature, thermal FEA</th><td>98.9 °C</td><td>145 °C</td></tr>
+            <tr><th scope="row">Deflection at 650 N</th><td>0.733 mm</td><td>set by the number of discs</td></tr>
+          </tbody>
+        </table>
+
+        <h4>On the bench</h4>
+        <p>
+          Five prototypes were laser-cut from beryllium-copper. On an Instron 5966 frame I loaded one to deflection limits of 0.35, 0.8, 0.9, and 1.0 mm in turn. At the smallest
+          loads the force-deflection curve is nonlinear, the signature of the manufacturing imperfections, and beyond that the spring is linear and repeatable; the body stress
+          stayed under the 1035 MPa tensile strength of the alloy throughout, and the part recovered its shape after every run. The prototype is stiffer than its model: 650 N
+          produced 0.81 mm of deflection where COMSOL had predicted 1.46 mm, a spring constant about 80% above the simulated value. That is usable for this module, since a higher
+          clamping force lowers the contact resistance of the dies up to a limit, and it is the gap the next design iteration has to close. With aluminum plates clamped to both ends,
+          an RLC meter read 192 µΩ of DC resistance and 6.3 nH of stray inductance against the simulated 148 µΩ and 2.8 nH, the same order and still far below the disc-spring
+          stack, with some allowance for measurement error. The work is published as an IEEE ECCE paper, two U.S. patent applications on which I am a co-inventor, and my
+          <a href="https://digitalcommons.unl.edu/elecengtheses/152" target="_blank" rel="noopener">MS thesis</a>, which is open access.
+        </p>
+
         <h4>Mathematical background</h4>
         <ul class="math">
-          <li>Finite element analysis of coupled structural and electrical fields</li>
-          <li>Discrete design-space optimization under stress and deflection constraints</li>
+          <li>Finite element analysis of coupled structural, electrical, and thermal fields</li>
+          <li>Elastic and plastic deformation, yield strength margins, and stress concentration at the slit ends</li>
+          <li>Design-space scanning and particle swarm optimization with a penalized cost function</li>
           <li>Skin effect and stray inductance at switching frequencies of 20 kHz</li>
         </ul>
       </div>
@@ -64,12 +119,32 @@
           <img src="assets/fig-spring.png" alt="CAD model of the monolithic spring showing the polished top surface, tapped hole, interleaved slits, and transistor legs" onerror="this.parentElement.style.display='none'">
           <figcaption>The monolithic spring. A polished top surface and tapped hole for clamping, interleaved slits that set the stiffness, and four legs bonded to the transistor dies.</figcaption>
         </figure>
+        <figure>
+          <img src="assets/fig-spring-disc-module.png" alt="CAD cross-section of the disc-spring module: a stack of steel disc springs on an insulator, with a copper current path looping around the stack" onerror="this.parentElement.style.display='none'">
+          <figcaption>The disc-spring module it replaces, modeled to the same targets: stacked steel discs, an insulator that keeps current out of the stack, and copper current paths looping around it.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-spring-stress.png" alt="COMSOL body stress plot of the monolithic spring under 650 N clamping force, with the highest stress at the ends of the slits" onerror="this.parentElement.style.display='none'">
+          <figcaption>Simulated body stress at 650 N. The stress concentrates at the ends of the slits, which is why the slit width dominates the stress limit.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-spring-thermal.png" alt="Side-by-side thermal FEA results: the monolithic spring body peaking at 98.9 degrees Celsius and the disc-spring module peaking at 145 degrees Celsius" onerror="this.parentElement.style.display='none'">
+          <figcaption>Thermal FEA with the same heat load on each die and both faces held at 70 °C: the monolithic spring (left) peaks at 98.9 °C, the disc-spring module (right) at 145 °C.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-spring-instron.jpg" alt="Two photographs of a beryllium-copper prototype spring between the platens of an Instron testing frame, unloaded and under clamping force" onerror="this.parentElement.style.display='none'">
+          <figcaption>A prototype between the platens of the Instron 5966, unloaded (left) and under clamping force (right).</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-spring-force-deflection.png" alt="Measured deflection against force for the prototype at four deflection limits, nonlinear at the smallest loads and then linear up to 1 mm" onerror="this.parentElement.style.display='none'">
+          <figcaption>Measured deflection against force for four deflection limits, from 0.35 to 1.0 mm: nonlinear at the smallest loads, then linear and repeatable.</figcaption>
+        </figure>
       </div>
     </article>
   </section>
 
   <section class="section next">
-    <p>Published as two IEEE ECCE papers and two U.S. patent applications, listed <a href="index.html#publications">here</a>. Other case studies: <a href="gyroscope.html">the underactuated gyroscope</a> and <a href="coursework-projects.html">hands-on projects from graduate coursework</a>.</p>
+    <p>Published as two IEEE ECCE papers, two U.S. patent applications, and an MS thesis, listed <a href="index.html#publications">here</a>. Other case studies: <a href="gyroscope.html">the underactuated gyroscope</a> and <a href="coursework-projects.html">hands-on projects from graduate coursework</a>.</p>
   </section>
 
 </main>

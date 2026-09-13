@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
   <script src="theme.js?v=2"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d59737863fb84b89897fe72d9e2c8856"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
@@ -35,7 +35,7 @@
 
   <section class="page-head">
     <h1>Real-time control of an underactuated double-gimbal control moment gyroscope</h1>
-    <p class="lede">PhD research, 2022 to 2026. University of Nebraska-Lincoln, advised by Wei Qiao and Liyan Qu.</p>
+    <p class="lede">PhD research, 2022 to 2026. University of Nebraska-Lincoln.</p>
   </section>
 
   <section class="hero">
@@ -52,7 +52,7 @@
 <article class="project">
       <div class="project-text">
         <h2 class="proj-h">Real-time control of an underactuated double-gimbal control moment gyroscope</h2>
-        <p class="project-meta">PhD dissertation, 2022 to 2026. Advisors: Wei Qiao and Liyan Qu.</p>
+        <p class="project-meta">PhD dissertation, 2022 to 2026.</p>
 
         <h4>The problem</h4>
         <p>
@@ -148,12 +148,16 @@
           <figcaption>One of the International Space Station's four double-gimbal control moment gyroscopes being unpacked at Kennedy Space Center in 1998, before its launch on the Z1 truss: a 100 kg wheel at 6600 rpm inside the black housing. NASA photograph.</figcaption>
         </figure>
         <figure>
+          <img src="assets/fig-gyro-loop.png" alt="Block diagram of the control loop: gimbal motors drive the four rigid bodies, position encoders feed the data acquisition board, the controller computes the torque command, and a current amplifier converts torque to motor current, with a separate PID holding the rotor at 750 rpm" onerror="this.parentElement.style.display='none'">
+          <figcaption>The loop on the rig. Encoder positions and velocities reach the controller through the DAQ, its torque command goes through the current amplifier to the gimbal motors, and a separate PID holds the rotor at 750 rpm.</figcaption>
+        </figure>
+        <figure>
           <img src="assets/fig-gimbal-lock.png" alt="Singularity boundaries of the gimbal angles, with the admissible operating cell shaded" onerror="this.parentElement.style.display='none'">
           <figcaption>Gimbal-lock boundaries in the space of the two gimbal angles. The controller keeps the gimbals inside one cell for all time.</figcaption>
         </figure>
         <figure>
-          <img src="assets/fig-tracking.png" alt="Measured tracking of the S-curve reference and the tracking error under FT-ASMC" onerror="this.parentElement.style.display='none'">
-          <figcaption>Measured tracking of a seven-phase sinusoidal-jerk S-curve reference on the unpowered axis, and the resulting error.</figcaption>
+          <img src="assets/fig-tracking.png" alt="Two measured plots: the unpowered axis angle following an S-curve reference, and the tracking error, with the finite-time sliding mode controller holding the reference while the adaptive LQR baseline drifts away late in the run" onerror="this.parentElement.style.display='none'">
+          <figcaption>Measured tracking of the seven-phase sinusoidal-jerk S-curve reference on the unpowered axis (top) and the tracking error (bottom): the finite-time sliding mode controller in blue, the adaptive LQR baseline in red, which loses the reference in the second half of the run.</figcaption>
         </figure>
       </div>
     </article>

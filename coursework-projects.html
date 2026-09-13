@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
   <script src="theme.js?v=2"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d59737863fb84b89897fe72d9e2c8856"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
@@ -286,12 +286,12 @@
 
       <div class="project-figures">
         <figure>
-          <img src="assets/fig-3rpr-workspace.png" alt="Reachable workspace of the 3-RPR planar parallel robot with its singularity loci" onerror="this.parentElement.style.display='none'">
-          <figcaption>Reachable workspace of the 3-RPR parallel robot, mapped point by point through the inverse kinematics.</figcaption>
+          <img src="assets/fig-3rpr-workspace.png" alt="A 3-RPR planar parallel robot, three legs from fixed base joints to a triangular platform, with the reachable region of the platform shaded" onerror="this.parentElement.style.display='none'">
+          <figcaption>The 3-RPR assignment: three prismatic legs on fixed revolute joints carry a triangular platform, and sweeping the plane through the inverse kinematics with the leg-length limits gives the reachable workspace, here recomputed for a sample geometry.</figcaption>
         </figure>
         <figure>
-          <img src="assets/fig-arm-heatmap.png" alt="Heat map of a kinematic performance index across the workspace of a two-link planar arm" onerror="this.parentElement.style.display='none'">
-          <figcaption>Kinematic performance of a two-link arm across its workspace.</figcaption>
+          <img src="assets/fig-arm-heatmap.png" alt="Heat map of the manipulability index across the annular workspace of a two-link planar arm, brightest in the middle of the reach and dark at the limits" onerror="this.parentElement.style.display='none'">
+          <figcaption>Manipulability of a two-link arm across its workspace, recomputed for a sample arm: highest with the elbow near a right angle, vanishing at full reach and full fold, where the Jacobian loses rank.</figcaption>
         </figure>
       </div>
     </article>
@@ -339,12 +339,12 @@
 
       <div class="project-figures">
         <figure>
-          <img src="assets/fig-pso-convergence.png" alt="Convergence of the particle swarm on the wireless power transfer link efficiency" onerror="this.parentElement.style.display='none'">
-          <figcaption>Swarm convergence on the wireless power link design.</figcaption>
+          <img src="assets/fig-pso-convergence.png" alt="Contour plot of the six-hump camelback function with particle positions at three iterations collapsing onto the global minimum, beside a plot of the best cost falling with iterations" onerror="this.parentElement.style.display='none'">
+          <figcaption>Particle swarm optimization on the six-hump camelback function, the homework exercise that preceded the wireless power project: the swarm starts spread over the domain and collapses onto one of the two global minima within ten iterations. Recomputed for illustration.</figcaption>
         </figure>
         <figure>
-          <img src="assets/fig-cnn-training.png" alt="Training and validation accuracy of the convolutional network on CIFAR-10" onerror="this.parentElement.style.display='none'">
-          <figcaption>Training and validation curves of the CIFAR-10 convolutional network.</figcaption>
+          <img src="assets/fig-happywhale-pipeline.png" alt="Flow diagram of six stages: photograph, detector CNN, crop and resize, embedding CNN, classifier, individual" onerror="this.parentElement.style.display='none'">
+          <figcaption>The pipeline we proposed for Happywhale: a detector crops the animal, a second network embeds its markings, and a classifier names the individual.</figcaption>
         </figure>
       </div>
     </article>
@@ -375,8 +375,12 @@
 
       <div class="project-figures">
         <figure>
-          <img src="assets/fig-snubber-waveforms.png" alt="Switch voltage and current at turn-off with and without the RC snubber" onerror="this.parentElement.style.display='none'">
-          <figcaption>Turn-off voltage and current with and without the snubber.</figcaption>
+          <img src="assets/fig-snubber-schematic.png" alt="Schematic of a buck converter from a 240 V photovoltaic string to a 48 V battery, with a capacitor, resistor, and diode snubber network across the switch" onerror="this.parentElement.style.display='none'">
+          <figcaption>The converter and its snubber. Cs takes over the current as Q opens, Ds lets it do so without the resistor in the way, and Rs discharges Cs when Q closes again.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/fig-snubber-waveforms.png" alt="Three panels: switch voltage and current at turn-off without the snubber, the same with the snubber, and the two switching loci on voltage-current axes" onerror="this.parentElement.style.display='none'">
+          <figcaption>Idealized turn-off with and without the snubber, drawn for illustration. Without it the full voltage sits across the switch while the current is still falling; with it the voltage rises only as the current falls, pulling the switching locus away from the high-stress corner.</figcaption>
         </figure>
       </div>
     </article>
@@ -384,7 +388,7 @@
   </section>
 
   <section class="section next">
-    <p>These projects sit alongside the two research case studies: <a href="gyroscope.html">the underactuated gyroscope</a> and <a href="monolithic-spring.html">the monolithic spring</a>. The courses they came from are listed on the <a href="coursework.html">Coursework page</a>.</p>
+    <p>These projects sit alongside the two research case studies, <a href="gyroscope.html">the underactuated gyroscope</a> and <a href="monolithic-spring.html">the monolithic spring</a>, and the undergraduate <a href="antenna.html">antenna measurement system</a>. The courses they came from are listed on the <a href="coursework.html">Coursework page</a>.</p>
   </section>
 
 </main>
