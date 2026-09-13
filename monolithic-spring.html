@@ -7,7 +7,8 @@
   <meta name="description" content="Designing, optimizing, fabricating and testing a beryllium-copper monolithic spring that replaces disc-spring stacks in high-frequency press-pack SiC FET modules.">
   <meta property="og:title" content="A monolithic spring for high-frequency SiC power modules | Bogac Canbaz">
   <meta property="og:description" content="Designing, optimizing, fabricating and testing a beryllium-copper monolithic spring that replaces disc-spring stacks in high-frequency press-pack SiC FET modules.">
-  <meta property="og:image" content="assets/rig.jpeg">
+  <meta property="og:image" content="https://bogaccanbaz.com/assets/fig-spring.png">
+  <meta property="og:url" content="https://bogaccanbaz.com/monolithic-spring.html">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +56,7 @@
 
         <h4>The design</h4>
         <p>
-          I replaced the whole stack with one block of beryllium-copper, an alloy that yields at about 1200 MPa against roughly 200 MPa for stainless steel and, being more than
+          I replaced the whole stack with one block of beryllium-copper, an alloy rated to about 1200 MPa against roughly 200 MPa for stainless steel and, being more than
           97% copper, conducts heat and current almost like pure copper. Seven layers of laser-cut slits, each layer rotated 45 degrees from the one below so that the slits open on
           the corners, turn the block into a spring with a chosen stiffness. A through-hole down the center adds deflection and removes mass without adding resistance or
           inductance. Four silver-coated legs on the bottom are sintered straight onto the SiC source pads, so the spring is also the conductor and the heat path, and a polished
@@ -98,11 +99,12 @@
         <p>
           Five prototypes were laser-cut from beryllium-copper. On an Instron 5966 frame I loaded one to deflection limits of 0.35, 0.8, 0.9, and 1.0 mm in turn. At the smallest
           loads the force-deflection curve is nonlinear, the signature of the manufacturing imperfections, and beyond that the spring is linear and repeatable; the body stress
-          stayed under the 1035 MPa tensile strength of the alloy throughout, and the part recovered its shape after every run. The prototype is stiffer than its model: 650 N
-          produced 0.81 mm of deflection where COMSOL had predicted 1.46 mm, a spring constant about 80% above the simulated value. That is usable for this module, since a higher
-          clamping force lowers the contact resistance of the dies up to a limit, and it is the gap the next design iteration has to close. With aluminum plates clamped to both ends,
-          an RLC meter read 192 µΩ of DC resistance and 6.3 nH of stray inductance against the simulated 148 µΩ and 2.8 nH, the same order and still far below the disc-spring
-          stack, with some allowance for measurement error. The work is published as an IEEE ECCE paper, two U.S. patent applications on which I am a co-inventor, and my
+          stayed under the 1035 MPa strength limit used for the alloy throughout, and the part recovered its shape after every run. The prototypes were cut to a design point
+          inside the swept range rather than to the final optimum, and they came out stiffer than their model: for that geometry COMSOL had predicted 1.46 mm of deflection at 650 N,
+          and the part gave 0.81 mm, a spring constant about 80% above the simulated value. That is usable for this module, since a higher clamping force lowers the contact
+          resistance of the dies up to a limit, and it is the gap the next design iteration has to close. With aluminum plates clamped to both ends, an RLC meter read 192 µΩ of DC
+          resistance and 6.3 nH of stray inductance against the simulated 148 µΩ and 2.8 nH, the same order and still far below the disc-spring stack, with some allowance for
+          measurement error. The work is published as two IEEE ECCE papers, two U.S. patent applications on which I am a co-inventor, and my
           <a href="https://digitalcommons.unl.edu/elecengtheses/152" target="_blank" rel="noopener">MS thesis</a>, which is open access.
         </p>
 
@@ -125,7 +127,7 @@
         </figure>
         <figure>
           <img src="assets/fig-spring-stress.png" alt="COMSOL body stress plot of the monolithic spring under 650 N clamping force, with the highest stress at the ends of the slits" onerror="this.parentElement.style.display='none'">
-          <figcaption>Simulated body stress at 650 N. The stress concentrates at the ends of the slits, which is why the slit width dominates the stress limit.</figcaption>
+          <figcaption>Simulated body stress at 650 N. The stress concentrates at the ends of the slits, which is why the slit width dominates the stress limit; the plot's color scale tops out a little below the 874.7 MPa peak reported for the optimized point.</figcaption>
         </figure>
         <figure>
           <img src="assets/fig-spring-thermal.png" alt="Side-by-side thermal FEA results: the monolithic spring body peaking at 98.9 degrees Celsius and the disc-spring module peaking at 145 degrees Celsius" onerror="this.parentElement.style.display='none'">

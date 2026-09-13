@@ -1,14 +1,16 @@
 # bogaccanbaz.github.io
 
-Seven pages, plain HTML and CSS, no build step.
+Seven pages, plain HTML and CSS plus one small script, no build step.
 
 - index.html                about, background, publications, patents, contact
-- portfolio.html            hub linking to the three case studies
+- portfolio.html            hub linking to the four case studies
 - coursework.html           graduate courses with course numbers, grouped by theme
 - gyroscope.html            case study one: underactuated gyroscope
 - monolithic-spring.html    case study two: monolithic spring
 - coursework-projects.html  case study three: hands-on projects from graduate courses
+- antenna.html              case study four: undergraduate antenna measurement system
 - style.css                 shared styles for all pages (bump ?v= in the <link> tags when it changes)
+- theme.js                  day and night switch, loaded on every page (bump ?v= in the <script> tags when it changes)
 
 ## assets/
 
@@ -35,7 +37,8 @@ Research case studies:
 
 Coursework case study (coursework-projects.html), in place:
 
-- fig-flyback-prototype.jpg   photo of the assembled flyback converter on the bench (also the portfolio card thumbnail)
+- fig-coursework-collage.webp portfolio card thumbnail for the coursework case study, built from the figures below
+- fig-flyback-prototype.jpg   photo of the assembled flyback converter on the bench (also the page's og:image)
 - fig-flyback-transformer.jpg photo of the final transformer on the LCR meter, reading 12.22 uH
 - fig-flyback-topology.png    PLECS drawing of the dual-output flyback topology
 - fig-flyback-bench-24v.jpg   oscilloscope and supply during the 24 V qualification run
