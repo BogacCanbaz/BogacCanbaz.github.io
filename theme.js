@@ -39,12 +39,15 @@
     toggle.type = 'button';
     toggle.className = 'theme-toggle';
     toggle.setAttribute('role', 'switch');
-    toggle.setAttribute('aria-label', 'Dark mode');
+    toggle.setAttribute('aria-label', 'Night mode');
+    toggle.setAttribute('aria-checked', root.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
     toggle.innerHTML =
+      '<span class="theme-toggle-label label-day" aria-hidden="true">Day mode</span>' +
+      '<span class="theme-toggle-label label-night" aria-hidden="true">Night mode</span>' +
       '<span class="theme-toggle-knob" aria-hidden="true">' +
-        '<svg class="icon-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3"/>' +
-          '<path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.4 1.4M11.55 11.55l1.4 1.4M3.05 12.95l1.4-1.4M11.55 4.45l1.4-1.4"/></svg>' +
-        '<svg class="icon-moon" viewBox="0 0 16 16"><path d="M13.5 10.2A6 6 0 0 1 5.8 2.5a6 6 0 1 0 7.7 7.7z"/></svg>' +
+        '<svg class="icon-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.8"/>' +
+          '<path d="M8 1.2v1.6M8 13.2v1.6M1.2 8h1.6M13.2 8h1.6M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M3.2 12.8l1.1-1.1M11.7 4.3l1.1-1.1"/></svg>' +
+        '<svg class="icon-moon" viewBox="0 0 16 16"><path d="M12.8 10.4A5.6 5.6 0 0 1 5.6 3.2a5.6 5.6 0 1 0 7.2 7.2z"/></svg>' +
       '</span>';
     header.appendChild(toggle);
     apply(root.getAttribute('data-theme'));

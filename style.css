@@ -692,11 +692,14 @@ main { max-width: 1120px; }
    Octagonal portrait
    ================================================================ */
 
-/* Regular octagon: each corner is cut back by 1 / (2 + sqrt 2) of the side,
-   so all eight edges come out the same length */
-.portrait img {
-  clip-path: polygon(29.29% 0, 70.71% 0, 100% 29.29%, 100% 70.71%,
-                     70.71% 100%, 29.29% 100%, 0 70.71%, 0 29.29%);
+/* Tall octagon: the frame is 15 wide by 17 high and every corner is cut
+   at 45 degrees by one fifth of the width (3 of 15 across, 3 of 17 down),
+   so the left and right edges run longer than the top and bottom */
+.intro .portrait img {
+  height: auto;
+  aspect-ratio: 15 / 17;
+  clip-path: polygon(20% 0, 80% 0, 100% 17.65%, 100% 82.35%,
+                     80% 100%, 20% 100%, 0 82.35%, 0 17.65%);
 }
 
 /* ================================================================
@@ -723,49 +726,92 @@ main { max-width: 1120px; }
 .site-header { justify-content: flex-start; }
 .site-header nav { margin-left: auto; }
 
+/* Pill switch: in day mode the knob sits on the right with a sun and the
+   label on the left; in night mode the pill darkens, the knob moves left
+   with a moon, and the label moves right */
+
 .theme-toggle {
+  --toggle-w: 124px;
+  --toggle-h: 32px;
+  --knob: 26px;
+  --inset: 2px;
   flex: none;
   align-self: center;
   position: relative;
-  width: 46px;
-  height: 24px;
+  width: var(--toggle-w);
+  height: var(--toggle-h);
   margin-left: 26px;
   padding: 0;
-  border: 1px solid var(--ink-soft);
-  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--paper-soft);
+  color: var(--ink);
+  font: inherit;
   cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
-.theme-toggle:hover { border-color: var(--ink); }
+.theme-toggle:hover { border-color: var(--ink-soft); }
 .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.theme-toggle[aria-checked="true"] { border-color: var(--ink-soft); }
+
+.theme-toggle-label {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+.label-day { left: 14px; }
+.label-night { right: 12px; opacity: 0; }
+.theme-toggle[aria-checked="true"] .label-day { opacity: 0; }
+.theme-toggle[aria-checked="true"] .label-night { opacity: 1; }
 
 .theme-toggle-knob {
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 16px;
-  height: 16px;
+  top: calc((var(--toggle-h) - 2px - var(--knob)) / 2);
+  left: var(--inset);
+  width: var(--knob);
+  height: var(--knob);
   display: grid;
   place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  transform: translateX(calc(var(--toggle-w) - 2px - var(--knob) - 2 * var(--inset)));
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+/* Night: the page variables are already swapped, so the pill stays on
+   --paper-soft (now dark) and the knob takes --ink (now light) */
+.theme-toggle[aria-checked="true"] .theme-toggle-knob {
+  transform: none;
+  border-color: var(--ink);
   background: var(--ink);
   color: var(--paper);
-  transition: transform 0.2s ease;
 }
-.theme-toggle[aria-checked="true"] .theme-toggle-knob { transform: translateX(22px); }
-@media (prefers-reduced-motion: reduce) { .theme-toggle-knob { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle, .theme-toggle-knob, .theme-toggle-label { transition: none; }
+}
 
 .theme-toggle svg {
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.6;
+  stroke-width: 1.4;
   stroke-linecap: round;
 }
-.theme-toggle .icon-moon { display: none; fill: currentColor; stroke: none; }
+.theme-toggle .icon-moon { display: none; }
 .theme-toggle[aria-checked="true"] .icon-sun { display: none; }
 .theme-toggle[aria-checked="true"] .icon-moon { display: block; }
 
 @media (max-width: 520px) {
   .site-header nav { margin-left: 0; }
-  .theme-toggle { position: absolute; top: 24px; right: var(--gutter); margin: 0; }
+  .theme-toggle { position: absolute; top: 20px; right: var(--gutter); margin: 0; }
 }
